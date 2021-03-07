@@ -1,0 +1,59 @@
+<%- include('../partials/head'); %>
+
+    <body>
+
+        <header>
+            <%- include('../partials/header'); %>
+        </header>
+
+
+        <section class="bannerTienda">
+            <div class="text">
+                <h2>Ideas para Jugar</h2>
+                <p>Juegos tradicionales con diseño para potenciar el desarrollo</p>
+                <a href="/products" class="btn">Tienda ONLINE</a>
+            </div>
+            <img src="images/tamaiti_banner_home.png" alt="">
+        </section>
+
+        <section class="buscarEdad">
+            <h2>¿Para qué edad buscás?</h2>
+            <ul class="navFilterEdad">
+                <li><a href="">1 a 3 años</a></li>
+                <li><a href="">3 a 6 años</a></li>
+                <li><a href="">6 a 9 años</a></li>
+                <li><a href="">+9 años</a></li>
+            </ul>
+        </section>
+
+        <section class="oportunidades">
+            <h2>Oportunidades</br><span>para jugar</span> </h2>
+            <div class="productList">
+                <% for (let i=0; i < productos.length; i++) {%>
+                    <a href="products/<%= productos[i].id %>" class="productCard">
+                        <img src="/uploads/img_products/<%= productos[i].img_url %>" alt="producto1">
+                        <div class="text">
+                            <h3 class="title">
+                                <%= productos[i].name %>
+                            </h3>
+                            <h5 class="edad">
+                                <%= productos[i].age %>
+                            </h5>
+                            <h4 class="precio">$<%= productos[i].price %>
+                            </h4>
+                            <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6>
+                        </div>
+                    </a>
+                    <% }%>
+            </div>
+
+            </div>
+        </section>
+
+
+
+        <footer>
+            <%- include('../partials/footer'); %>
+        </footer>
+
+        <%- include('../partials/closure'); %>

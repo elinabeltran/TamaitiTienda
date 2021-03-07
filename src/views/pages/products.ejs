@@ -1,0 +1,40 @@
+<%- include('../partials/head'); %>
+<body>
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+<h1 class="titlePage">Tienda Online</h1>
+<section class="oportunidades">
+
+    <h5> <%= productos.length %> RESULTADOS </h5>
+
+    <div class="productList">
+        <% for (let i=0; i < productos.length; i++) {%>
+            <a href="products/<%= productos[i].id %>" class="productCard">
+                <img src="../../../uploads/img_products/<%= productos[i].img_url %>" alt="producto1">
+                <div class="text">
+                    <h3 class="title">
+                        <%= productos[i].name %>
+                    </h3>
+                    <h5 class="edad">
+                        <%= productos[i].age %>
+                    </h5>
+
+                    <h4 class="precio">$<%= productos[i].price %>
+                    </h4>
+                    <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6>
+                </div>
+            </a>
+            <% }%>
+    </div>
+</section>
+
+
+
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+
+<%- include('../partials/closure'); %>
