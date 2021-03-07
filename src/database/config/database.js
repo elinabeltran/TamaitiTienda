@@ -1,9 +1,11 @@
+require('dotenv').config()
+
 module.exports = {
   "production": {
-    "username": "elina",
-    "password": "pacaPACA01!",
-    "database": "elina_tamaiti_ddbb",
-    "host": "mysql-elina.alwaysdata.net",
+    "username": process.env.DB_USER,
+    "password": process.env.DB_PASS,
+    "database": process.env.DB_NAME,
+    "host": process.env.DB_HOST,
     "dialect": "mysql"
   },
   "test": {
@@ -16,7 +18,7 @@ module.exports = {
   "development": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "db_tamaiti",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

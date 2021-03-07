@@ -6,7 +6,7 @@ module.exports = {
     index: function (req, res) {
         db.Product.findAll({ })
             .then(function (productos) {
-                console.log(productos)
+                // console.log(productos)
                 res.render("pages/products", { productos: productos })
             })
             .catch(function (error) {
