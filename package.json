@@ -4,7 +4,7 @@
   "description": "Es un emprendimiento de juegos tradicionales con diseño para potenciar el desarrollo.\r Los productos son juegos con diferentes temáticas para potenciar el aprendizaje.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node ./app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
