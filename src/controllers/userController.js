@@ -30,7 +30,7 @@ module.exports = {
     detail: function (req, res) {
         db.User.findByPk(req.params.id)
             .then(function (user) {
-                res.render("pages/userPerfil", {user:user})
+                res.render("pages/userPerfil", { user: user })
             })
             .catch(function (error) {
                 return res.send(error)
@@ -40,7 +40,7 @@ module.exports = {
     editBoard: function (req, res) {
         db.User.findByPk(req.params.id)
             .then(function (user) {
-                res.render("pages/userEdit", {user:user})
+                res.render("pages/userEdit", { user: user })
             })
             .catch(function (error) {
                 return res.send(error)
@@ -48,8 +48,6 @@ module.exports = {
     },
 
     update: function (req, res) {
-        console.log(req.body)
-
         db.User.update({
             name: req.body.name,
             lastName: req.body.lastName,
@@ -58,11 +56,10 @@ module.exports = {
             where: {
                 id: req.params.id
             }
-        })
-        .then(function(userUpdated){
+        }) .then (function(){
+            let id= req.params.id;
+            return res.redirect("../"+id)
 
-            res.send(userUpdated)
         })
-    },
-
+    }
 }

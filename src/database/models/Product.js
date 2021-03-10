@@ -59,16 +59,12 @@ module.exports = function (sequelize, dataTypes){
     //     });
     // }
 
-    // Product.associate = function(models){
-    //      Product.belongsTo(models.Category,{
-    //          as:"category",
-    //          foreingKey:"id_category"
-    //      });
-    //  }
-
-
-
-
+    Product.associate = function(models){
+         Product.belongsTo(models.Category,{
+             as:"category",
+             foreignKey:"id_category"
+         });
+     }
 
     return Product
 

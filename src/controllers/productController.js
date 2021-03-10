@@ -4,9 +4,9 @@ const { Op } = require("sequelize");
 
 module.exports = {
     index: function (req, res) {
-        db.Product.findAll({ })
+        db.Product.findAll({ 
+        })
             .then(function (productos) {
-                // console.log(productos)
                 res.render("pages/products", { productos: productos })
             })
             .catch(function (error) {
@@ -59,8 +59,11 @@ module.exports = {
 
     detail: function (req, res) {
         let pedidoProducto = req.params.id;
-        db.Product.findAll()
+        db.Product.findAll(
+            // {include:"category"}
+        )
             .then(function (productos) {
+                console.log(productos[16])
                 for (let i = 0; i < productos.length; i++) {
                     if (pedidoProducto == productos[i].id) {
                         res.render('pages/details', {
@@ -106,9 +109,12 @@ module.exports = {
                 id: req.params.id
             }
         })
-        .then(function(productoActualizado){
-            res.send(productoActualizado)
+        .then(function(){
+            return res.redirect("../"+req.params.id)
         })
+        .catch(function(error) {
+            res.send(error)
+       })
     },
 
     
@@ -133,7 +139,6 @@ module.exports = {
     },
 
     search: function(req, res) {
-        console.log(req.query)
         db.Product.findAll({
             where: {
                 name: {
