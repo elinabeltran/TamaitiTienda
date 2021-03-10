@@ -60,7 +60,7 @@ module.exports = {
     detail: function (req, res) {
         let pedidoProducto = req.params.id;
         db.Product.findAll(
-            // {include:"category"}
+             {include:"category"}
         )
             .then(function (productos) {
                 console.log(productos[16])

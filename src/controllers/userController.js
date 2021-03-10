@@ -19,7 +19,8 @@ module.exports = {
             password: req.body.password
         })
             .then(function (user) {
-                res.redirect("pages/userPerfil", { user: user });
+                let id= user.id;
+                return res.redirect("register/"+id)
 
             })
             .catch(function (error) {
@@ -50,7 +51,7 @@ module.exports = {
     update: function (req, res) {
         db.User.update({
             name: req.body.name,
-            lastName: req.body.lastName,
+            last_name: req.body.lastName,
             email: req.body.email,
         }, {
             where: {

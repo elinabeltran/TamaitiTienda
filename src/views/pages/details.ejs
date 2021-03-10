@@ -13,6 +13,8 @@
 
         <h5 class="edad"><%= elProducto.age %></h5>
         <h4 class="precio">$ <%= elProducto.price %></h4>
+        <h4 class="precio"> <%= elProducto.category.name %></h4>
+
         <!-- <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6> -->
         <button type="submit" class="btn">Comprar</button>
         <a h href="edit/<%= elProducto.id %>"><button  class="btn_secundary">Editar</button></a>

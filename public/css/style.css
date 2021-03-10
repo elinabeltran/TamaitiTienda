@@ -353,6 +353,12 @@ footer {
     align-items: center;
     padding: 30px 100px;
     background-color: var(--colorPrincipal);
+    /* position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%; */
+
 }
 
 
@@ -474,8 +480,10 @@ label{
         border-radius: 30em;
     }    
 
+    section.bannerTienda img {
+        display: none;
 
-
+    } 
 
 
 @media(max-width:375px){
