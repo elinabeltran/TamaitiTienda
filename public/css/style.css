@@ -49,6 +49,7 @@ form {
 }
 
 
+
 /* ============
 - HEADER
 ============ */
@@ -419,6 +420,18 @@ label{
     padding: 10px;
 }
 
+.errors-group {
+    background-color: rgba(255, 0, 0, 0.15);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
+    color: red;
+    font-size: small;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+
  /* ================================
 - Media Querys
 ================================*/
@@ -530,7 +543,7 @@ a.bannerTienda{
         min-width: 90%;
     }    
 
-}
+
 
 .form{
     padding: 0 5%;
@@ -602,9 +615,8 @@ a.productCard .text  h4.precio {
     font-size: 25px;
     align-self: flex-end ;
 
-}
+};
 a.productCard .text h6.formaPago {
     color:#231f2048;
     font-size: 16px;
 }
-

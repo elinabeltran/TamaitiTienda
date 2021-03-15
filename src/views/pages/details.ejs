@@ -13,7 +13,8 @@
 
         <h5 class="edad"><%= elProducto.age %></h5>
         <h4 class="precio">$ <%= elProducto.price %></h4>
-        <h4 class="precio"> <%= elProducto.category.name %></h4>
+        <h5 class="precio edad"> <%= elProducto.category.name %></h5>
+        <br>
 
         <!-- <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6> -->
         <button type="submit" class="btn">Comprar</button>
@@ -26,7 +27,7 @@
     <br>
     <div class="productInfo" >
        <h7><b>Características:</b></h7>
-       <br>
+    <br>
        <br>
 
        <p><%= elProducto.description %>

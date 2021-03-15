@@ -3,38 +3,46 @@
 
     <header>
         <%- include('../partials/header'); %>
+        <script src="/js/js_front.js"></script>
+
     </header>
 
 
 
     <section>
+
+      <h1 class="titlePage">Cargar nuevo Producto</h1> 
+     
+      <div class="errors-group">
+      <ul class="errorsUl"></ul> 
+      </div>
+
         <div id="createProduct" class="form">
-            <form  action="/products/create" autocomplete="on"  method="POST" enctype="multipart/form-data"> 
-              <h1 class="titlePage">Cargar nuevo Producto</h1> 
+            <form  class="createProductForm"action="/products/create" autocomplete="on"  method="POST"  enctype="multipart/form-data"> 
               <div class="form-group">
                 <label for="" class="" >Nombre del producto </label>
-                  <input id="name" name="name" class="form-control" required="required" type="text" placeholder="Nombre del producto" />
+                  <input id="name" name="name" class="form-control"  type="text" placeholder="Nombre del producto" />
               </div>
 
               <div class="form-group">
                 <label for="" class="" > Descripción</label>
-                <input id="description" name="description"  class="form-control" required="required" type="text" placeholder="Descripción del producto"/> 
+                <input id="description" name="description"  class="form-control"  type="text" placeholder="Descripción del producto"/> 
               </div>
 
            <div class="form-group">
                 <label for="" class="" >Carga la imagen </label>
-                <input id="image" name="image" class="form-control" required="required" type="file" placeholder="Imagen de producto" />
+                <input id="image" name="image" class="form-control" " type="file" placeholder="Imagen de producto" />
             </div>  
 
 
             <div class="form-group">
               <label for="" class="" >Precio </label>
-              <input id="price" name="price" class="form-control" required="required" type="number" placeholder="$1.111" /> 
+              <input id="price" name="price" class="form-control" type="number" placeholder="$1.111" /> 
             </div>
 
             <div class="form-group">
               <label for="" class="">Edad sugerida</label>
-              <select id="age" name="age"  class="form-control" required="required" placeholder="Edad sugerida">
+              <select id="age" name="age"  class="form-control" placeholder="Edad sugerida">
                 <option value="1 a 3 años">1 a 3 años</option>
                 <option value="3 a 6 años">3 a 6 años</option>
                 <option value="6 a 9 años">6 a 9 años</option>
@@ -46,7 +54,7 @@
 
             <div class="form-group">
               <label for="" class=""> Categoria</label>
-               <select id="category" name="category"   class="form-control" required="required" placeholder="Selecciona una categoria">
+               <select id="category" name="category"   class="form-control" placeholder="Selecciona una categoria">
                 
                 <% for (let i = 0; i < categorias.length; i++) {%> 
                  <option value="<%= categorias[i].id %>"><%= categorias[i].name %></option>
@@ -57,13 +65,9 @@
             </div>
 
 
-
               <p class=""> 
                 <button type="submit" class="btn btn-primary">Confirmar</button>
-                <p class="change_link"> Ya eres miembro?  </p>
-                  <a href="login" class="to_register"> Loguéate </a>
 
-                </p>
             </form>
         </div>
     </section>
@@ -72,4 +76,5 @@
         <%- include('../partials/footer'); %>
     </footer>
 
+    
 <%- include('../partials/closure'); %>

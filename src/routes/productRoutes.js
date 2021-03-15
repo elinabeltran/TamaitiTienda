@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
   })
    
 var upload = multer({ storage: storage })
-
+// 
 
 router.get('/', productController.index);
 router.get('/create', productController.boardCreate);

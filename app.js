@@ -5,7 +5,8 @@ const port = process.env.port || 3000;
 const methodOverride= require('method-override');
 
 
-var indexRouter = require('./src/routes/index');
+const indexRouter = require('./src/routes/index');
+const logMiddleware = require('./src/middlewares/logMiddleware');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "src/views"));
@@ -18,7 +19,10 @@ app.use(methodOverride('_method'));
 
 
 app.use('/', indexRouter);
-
+app.use(function(req, res, next) {
+    res.status(404).render('pages/404error');
+  });
+app.use(logMiddleware);
 
 
 app.listen(port, function(){

@@ -39,16 +39,6 @@ module.exports = {
         })
             .then(function (producto) {
                 res.redirect("/");
-                db.Category.findOne({
-                    where: { name: req.body.category }
-                })
-                    .then(function (categoriaSeleccionada) {
-                        db.Product.update({ id_category: categoriaSeleccionada.id }, {
-                            where: {
-                                id: producto.id
-                            }
-                        });
-                    })
             })
             .catch(function (error) {
                 return res.send(error)
@@ -63,7 +53,6 @@ module.exports = {
              {include:"category"}
         )
             .then(function (productos) {
-                console.log(productos[16])
                 for (let i = 0; i < productos.length; i++) {
                     if (pedidoProducto == productos[i].id) {
                         res.render('pages/details', {
