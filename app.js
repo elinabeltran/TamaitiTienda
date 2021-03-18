@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const port = process.env.port || 3000;
 const methodOverride= require('method-override');
+const session= require('express-session');
+
 
 
 const indexRouter = require('./src/routes/index');
@@ -23,6 +25,7 @@ app.use(function(req, res, next) {
     res.status(404).render('pages/404error');
   });
 app.use(logMiddleware);
+app.use(session({secret:"Secreto de session"}));
 
 
 app.listen(port, function(){

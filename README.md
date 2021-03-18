@@ -1,5 +1,5 @@
 # Tamaiti.
-Estado: Sprint-6 completo (Sprint-5 sin aplicar).
+Estado: ver retro y tablero asana
 
 ## Instrucciones de instalación paso a paso.
 

@@ -3,7 +3,8 @@ const db = require('../database/models');
 const { Op } = require("sequelize");
 const bcrypt = require('bcryptjs');
 const { resolveSoa } = require('dns');
-const { check, validationResult, body } = require("express-validator")
+const { check, validationResult, body } = require("express-validator");
+const { EEXIST } = require('constants');
 
 
 module.exports = {
@@ -12,24 +13,90 @@ module.exports = {
     },
 
     login: function (req, res) {
-        db.User.findOne({
-            where: {
-                email: req.body.email
-            }
-        }).then(function (resultado) {
-            if (resultado == null) {
-                return res.send("Mail o contraseña incorrectos")
-            }
+        let errors = validationResult(req)
 
-            if (!bcrypt.compareSync(req.body.password, resultado.password)) {
-                return res.send("Mail o contraseña incorrectos")
-            };
-            res.redirect("partials/header", { resultado: resultado })
-        })
-            .catch(function (error) {
-                return res.send(error)
+        if (errors.errors.length>0){
+            res.render("pages/login",{errors:errors.errors})
+            }else{
+            
+          db.User.findOne({
+                where: {
+                    email: req.body.email
+                }
+            }).then(function (resultado) {
+                let usuarioALoguear = resultado
+
+                if (usuarioALoguear != null & !bcrypt.compareSync(req.body.password, usuarioALoguear.password)) {
+
+                    return res.send("Bienvenide" + " " + usuarioALoguear.name)
+                } else {
+                    return res.render("pages/login", {
+                        errors: [
+                            { msg: "Credenciales invalidas si no tienes cuenta. Registrate!" }
+                        ]
+                    })
+                }
+
             })
+                .catch(function (error) {
+                    return res.send(error)
+                })
+        }
+
+        
+
+        // if (errors.isEmpty()) {
+        //     db.User.findOne({
+        //         where: {
+        //             email: req.body.email
+        //         }
+        //     }).then(function (resultado) {
+        //         let usuarioALoguear = resultado
+
+        //         if (usuarioALoguear != null) {
+        //             return res.send("Bienvenide" + " " + usuarioALoguear.name)
+        //         } else {
+        //             return res.render("pages/login", {
+        //                 errors: [
+        //                     { msg: "Credenciales invalidas si no tienes cuenta. Registrate!" }
+        //                 ]
+        //             })
+        //         }
+
+        //     })
+        //         .catch(function (error) {
+        //             return res.send(error)
+        //         })
+        // }
+
+        // res.render("pages/login",{errors:errors.errors})
+        // if (errors.isEmpty()) {
+
+        //     db.User.findOne({
+        //         where: {
+        //             email: req.body.email
+        //         }
+        //     }).then(function (resultado) {
+        //         if (resultado != null) {
+        //             if (!bcrypt.compareSync(req.body.password, resultado.password)) {
+        //                 let usuarioALoguearse = resultado;
+        //                 return res.Json("usuarioALoguearse")
+        //             }
+        //         };
+
+        //         if (resultado == null) {
+        //             return res.render("pages/register", {
+        //                 errors: [
+        //                     { msg: "Credenciales invalidas" }
+        //                 ]
+        //             })
+        //         } else {
+        //             return res.render("pages/register", { errors: errors.errors })
+        //         }
+        //     })
+        // }
     },
+
 
 
 
@@ -55,49 +122,43 @@ module.exports = {
                 .catch(function (error) {
                     return res.send(error)
                 })
-        } 
-        else { return res.render("pages/register", {errors:errors.errors})}
+        }
+        else { return res.render("pages/register", { errors: errors.errors }) }
     },
 
-
-
-
-
-
-
-        detail: function (req, res) {
-            db.User.findByPk(req.params.id)
-                .then(function (user) {
-                    res.render("pages/userPerfil", { user: user })
-                })
-                .catch(function (error) {
-                    return res.send(error)
-                })
-        },
-
-        editBoard: function (req, res) {
-            db.User.findByPk(req.params.id)
-                .then(function (user) {
-                    res.render("pages/userEdit", { user: user })
-                })
-                .catch(function (error) {
-                    return res.send(error)
-                })
-        },
-
-        update: function (req, res) {
-            db.User.update({
-                name: req.body.name,
-                last_name: req.body.lastName,
-                email: req.body.email,
-            }, {
-                where: {
-                    id: req.params.id
-                }
-            }).then(function () {
-                let id = req.params.id;
-                return res.redirect("../" + id)
-
+    detail: function (req, res) {
+        db.User.findByPk(req.params.id)
+            .then(function (user) {
+                res.render("pages/userPerfil", { user: user })
             })
-        }
+            .catch(function (error) {
+                return res.send(error)
+            })
+    },
+
+    editBoard: function (req, res) {
+        db.User.findByPk(req.params.id)
+            .then(function (user) {
+                res.render("pages/userEdit", { user: user })
+            })
+            .catch(function (error) {
+                return res.send(error)
+            })
+    },
+
+    update: function (req, res) {
+        db.User.update({
+            name: req.body.name,
+            last_name: req.body.lastName,
+            email: req.body.email,
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(function () {
+            let id = req.params.id;
+            return res.redirect("../" + id)
+
+        })
     }
+}
