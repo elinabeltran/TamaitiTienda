@@ -421,11 +421,11 @@ label{
 }
 
 .errors-group {
-    background-color: rgba(255, 0, 0, 0.15);
+    background-color:rgb(255 0 0 / 10%);
     border-radius: 5px;
     width: fit-content;
     padding: 10px;
-    color: red;
+    color:#e60000;
     font-size: small;
     margin: 0 auto;
     margin-bottom: 20px;

@@ -1,15 +1,23 @@
 const express = require('express');
-const { check, validationResult, body } = require("express-validator")
-
-const userController = require('../controllers/userController');
-
 const router = express.Router();
 
-router.get('/', userController.boardLogin);
-router.post('/', [
-    check("email").isEmail().withMessage("El email debe ser un email válido"),
-    check("password").isLength({ min: 8 }).withMessage("La contraseña debe tener al menos 8 caracteres."),
-],userController.login);
+const userController = require('../controllers/userController');
+const validatorLoginMiddleware = require('../middlewares/validatorLoginMiddleware');
 
+
+
+router.get('/', userController.boardLogin);
+router.post('/', validatorLoginMiddleware,userController.login);
+router.get('/check', 
+
+function(req,res){
+    console.log(req.session.usuarioLogueado)
+    if (req.session.usuarioLogueado == undefined){
+        res.send ("no estas logueado")
+    }else{
+        res.send ("Hola"+req.session.usuarioLogueado.name)
+   }
+}
+);
 
 module.exports = router;

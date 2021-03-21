@@ -7,16 +7,24 @@
 
     <section style="background-color: #efefef;" >
         <div id="login" class="form">
-              <h1 class="titlePage">Login</h1> 
+              <h1 class="titlePage">Iniciar sesión</h1> 
+
+              <% if(typeof msgBienvenida != "undefined"){%>
+                <h5><%=msgBienvenida.msg %></h5>
+                <br>
+
+                <%}%>
+
+
               <% if(typeof errors != "undefined"){%>
                 <div class="errors-group">
                   <ul class="errorsUl">
+
                     <% for(let i = 0 ; i < errors.length; i++){%>
                       <li><%=errors[i].msg %></li>
                       <%}%>
                   </ul> 
                   </div>
-
                <%}%>
 
                <form  action="" autocomplete="on" method="POST"> 
@@ -26,15 +34,19 @@
                 <label for="username" class="uname" >E-mail: </label>
                   <input id="useremail" name="email" type="text" placeholder="Tu e-mail" class="form-control"/>
               </div>
+             
+
               <!-- required="required"  -->
               <div class="form-group">
                 <label for="password" class="youpasswd"> Contraseña:</label>
                   <input id="password" name="password"  type="password" placeholder="Tu password"  title="Debe contener al menos un número y una letra minúscula y mayúscula, y al menos 8 o más caracteres" class="form-control" class="form-control"/> 
-              </div>
+
+
+                </div>
               <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
 
               <div class="login button">
-                  <button type="submit" value="Login" class="btn btn-primary">Login</button>
+                  <button type="submit" value="Login" class="btn btn-primary">Ingresar</button>
               </div>
             <br>
 

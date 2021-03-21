@@ -1,25 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
+const upload = require('../middlewares/multerMiddleware');
 const path = require('path');
 const productController = require('../controllers/productController');
+const { check, validationResult, body } = require("express-validator")
 
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, '../../public/uploads/img_products'))
-    },
-    filename: function (req, file, cb) {
-      cb(null, req.body.name + Date.now() + path.extname(file.originalname))
-    }
-  })
-   
-var upload = multer({ storage: storage })
-// 
 
 router.get('/', productController.index);
 router.get('/create', productController.boardCreate);
-router.post('/create',upload.any(), productController.create);
+router.post('/create',upload.any(),
+// [
+//     check("name").isLength({ min: 5 }).withMessage("El campo nombre debe estar completo con al menos 5 caracteres"),
+//     check("description").isLength({ min: 20 }).withMessage("El campo description debe estar completo con al menos 20 caracteres"),
+// ],
+productController.create);
 router.get('/edit/:id', productController.edit);
 router.put('/edit/:id', productController.update);
 router.delete('/delete/:id', productController.delete);

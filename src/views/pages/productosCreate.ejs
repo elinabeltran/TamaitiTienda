@@ -12,6 +12,16 @@
     <section>
 
       <h1 class="titlePage">Cargar nuevo Producto</h1> 
+      <% if(typeof errors != "undefined"){%>
+        <div class="errors-group">
+          <ul class="errorsUl">
+            <% for(let i = 0 ; i < errors.length; i++){%>
+              <li><%=errors[i].msg %></li>
+              <%}%>
+          </ul> 
+          </div>
+
+       <%}%>
      
       <div class="errors-group">
       <ul class="errorsUl"></ul> 

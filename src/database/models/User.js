@@ -24,7 +24,8 @@ module.exports = function (sequelize, dataTypes){
 
         email: {
             type: dataTypes.STRING,
-            notNull: true
+            notNull: true,
+            unique: true
         },
         avatar: {
             type: dataTypes.STRING(45),

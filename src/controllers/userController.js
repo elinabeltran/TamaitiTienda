@@ -2,9 +2,10 @@ const path = require('path');
 const db = require('../database/models');
 const { Op } = require("sequelize");
 const bcrypt = require('bcryptjs');
-const { resolveSoa } = require('dns');
+const session = require('express-session');
+
+
 const { check, validationResult, body } = require("express-validator");
-const { EEXIST } = require('constants');
 
 
 module.exports = {
@@ -15,21 +16,37 @@ module.exports = {
     login: function (req, res) {
         let errors = validationResult(req)
 
-        if (errors.errors.length>0){
-            res.render("pages/login",{errors:errors.errors})
-            }else{
-            
-          db.User.findOne({
+        if (errors.errors.length > 0) {
+            res.render("pages/login", {
+                errors: errors.errors,
+            })
+        } else {
+
+            db.User.findOne({
                 where: {
                     email: req.body.email
                 }
             }).then(function (resultado) {
-                let usuarioALoguear = resultado
+                let usuarioALoguear = resultado;
+                if (usuarioALoguear != null) {
+                    if (bcrypt.compareSync(req.body.password, usuarioALoguear.password)) {
+                        req.session.usuarioLogueado = {
+                            name: usuarioALoguear.name,
+                            email: usuarioALoguear.email,
+                            avatar: usuarioALoguear.avatar,
+                            id: usuarioALoguear.id,
+                        };
+                        return res.render("pages/userPerfil", { user: usuarioALoguear })
+                    } else {
+                        return res.render("pages/login", {
+                            errors: [
+                                { msg: "Password incorrecto" }
+                            ]
+                        })
+                    }
+                }
+                else {
 
-                if (usuarioALoguear != null & !bcrypt.compareSync(req.body.password, usuarioALoguear.password)) {
-
-                    return res.send("Bienvenide" + " " + usuarioALoguear.name)
-                } else {
                     return res.render("pages/login", {
                         errors: [
                             { msg: "Credenciales invalidas si no tienes cuenta. Registrate!" }
@@ -43,62 +60,7 @@ module.exports = {
                 })
         }
 
-        
-
-        // if (errors.isEmpty()) {
-        //     db.User.findOne({
-        //         where: {
-        //             email: req.body.email
-        //         }
-        //     }).then(function (resultado) {
-        //         let usuarioALoguear = resultado
-
-        //         if (usuarioALoguear != null) {
-        //             return res.send("Bienvenide" + " " + usuarioALoguear.name)
-        //         } else {
-        //             return res.render("pages/login", {
-        //                 errors: [
-        //                     { msg: "Credenciales invalidas si no tienes cuenta. Registrate!" }
-        //                 ]
-        //             })
-        //         }
-
-        //     })
-        //         .catch(function (error) {
-        //             return res.send(error)
-        //         })
-        // }
-
-        // res.render("pages/login",{errors:errors.errors})
-        // if (errors.isEmpty()) {
-
-        //     db.User.findOne({
-        //         where: {
-        //             email: req.body.email
-        //         }
-        //     }).then(function (resultado) {
-        //         if (resultado != null) {
-        //             if (!bcrypt.compareSync(req.body.password, resultado.password)) {
-        //                 let usuarioALoguearse = resultado;
-        //                 return res.Json("usuarioALoguearse")
-        //             }
-        //         };
-
-        //         if (resultado == null) {
-        //             return res.render("pages/register", {
-        //                 errors: [
-        //                     { msg: "Credenciales invalidas" }
-        //                 ]
-        //             })
-        //         } else {
-        //             return res.render("pages/register", { errors: errors.errors })
-        //         }
-        //     })
-        // }
     },
-
-
-
 
     registerBoard: function (req, res) {
         res.render('pages/register');
@@ -106,25 +68,46 @@ module.exports = {
 
     register: function (req, res) {
         let errors = validationResult(req)
+
         if (errors.isEmpty()) {
-            db.User.create({
-                name: req.body.name,
-                last_name: req.body.lastName,
-                email: req.body.email,
-                avatar: req.files[0].filename,
-                password: bcrypt.hashSync(req.body.password, 12)
+            db.User.findOrCreate({
+                where: { email: req.body.email },
+                defaults: {
+                    name: req.body.name,
+                    last_name: req.body.lastName,
+                    email: req.body.email,
+                    avatar: req.files[0].filename,
+                    password: bcrypt.hashSync(req.body.password, 12)
+                }
+            }).then(function (created, user) {
+
+                console.log(created, user)
+                if (!created) {
+                    return res.render("pages/register", {
+                        errors: [
+                            { msg: "El Email, ya fue registrado!" }
+                        ]
+                    })
+
+                }
+
+                let msgBienvenida = {
+                    msg: "Te registrate con éxito. Ya puedes iniciar sesión!"
+                }
+                console.log(msgBienvenida)
+                return res.render("pages/login", { msgBienvenida: msgBienvenida })
+
+
             })
 
-                .then(function (user) {
-                    let id = user.id;
-                    return res.redirect("register/" + id)
-                })
                 .catch(function (error) {
                     return res.send(error)
                 })
-        }
-        else { return res.render("pages/register", { errors: errors.errors }) }
+        } else { return res.render("pages/register", { errors: errors.errors }) }
+
+
     },
+
 
     detail: function (req, res) {
         db.User.findByPk(req.params.id)
@@ -162,3 +145,4 @@ module.exports = {
         })
     }
 }
+

@@ -47,6 +47,9 @@ module.exports = {
     },
 
 
+    
+
+
     detail: function (req, res) {
         let pedidoProducto = req.params.id;
         db.Product.findAll(
