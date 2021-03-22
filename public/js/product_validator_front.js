@@ -5,31 +5,30 @@ window.addEventListener('load', function () {
     formulario.addEventListener('submit', function (e) {
        
         let arrayErrors = []
-
         let name = document.querySelector('#name');
         let description = document.querySelector('#description');
         let price = document.querySelector('#price');
         let image = document.querySelector('#image');
         let category = document.querySelector('#category');
         if (name.value == "") {
-            arrayErrors.push('Debes completar el campo de nombre')
+            arrayErrors.push('Debes colocar un nombre de producto.')
         }
         console.log(image.value)
 
-        if (description.value.length < 20) {
-            arrayErrors.push('Debes completar el campo de description(20 caracteres minimo)')
+        if (description.value.length < 5) {
+            arrayErrors.push('Debes completar la descripción(5 caracteres minimo)')
         }
         if (price.value == "") {
-            arrayErrors.push('Debes completar el campo de precio')
+            arrayErrors.push('Debes completar el Precio')
         }
 
         if (image.value == "") {
-            arrayErrors.push('Debes carga una imagen con formato válido (jpg|png|jpeg|gif).')
+            arrayErrors.push('Debes adjuntar una imagen de producto.')
            
         }
 
-        if (!(/\.(jpg|png|jpeg|gif)$/i).test(image.value)) {
-            arrayErrors.push('El archivo a adjuntar no es una imagen');
+        if (!(/\.(jpg|png|jpeg)$/i).test(image.value)) {
+            arrayErrors.push('Debes carga una imagen con formato válido (jpg|png|jpeg)');
         }
 
         if (category.value == "") {

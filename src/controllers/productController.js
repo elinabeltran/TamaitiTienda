@@ -1,10 +1,10 @@
-const path = require('path');
 const db = require('../database/models');
-const { Op } = require("sequelize");
+const { check, validationResult, body } = require("express-validator");
+
 
 module.exports = {
     index: function (req, res) {
-        db.Product.findAll({ 
+        db.Product.findAll({
         })
             .then(function (productos) {
                 res.render("pages/products", { productos: productos })
@@ -29,31 +29,48 @@ module.exports = {
     },
 
     create: function (req, res) {
-        db.Product.create({
-            name: req.body.name,
-            age: req.body.age,
-            description: req.body.description,
-            id_category: req.body.category,
-            img_url: req.files[0].filename,
-            price: req.body.price
-        })
-            .then(function (producto) {
-                res.redirect("/");
+        let errors = validationResult(req)
+        if (errors.isEmpty()) {
+            db.Product.findOrCreate({
+                where: { name: req.body.name },
+                defaults: {
+                    name: req.body.name,
+                    age: req.body.age,
+                    description: req.body.description,
+                    id_category: req.body.category,
+                    img_url: req.files[0].filename,
+                    price: req.body.price
+                }
+            }).then(function (created, product) {
+                // console.log(created, product)
+              
+                if (created) {
+                    db.Category.findAll()
+                    .then(function (categorias) {
+                        return res.render("pages/productosCreate", {
+                            categorias: categorias,
+                            errors: [
+                                { msg: "Ya hay registrado un producto con este nombre!" }
+                            ]
+                        })
+                    })
+                  }
+
+                // return res.redirect("/products")
             })
-            .catch(function (error) {
-                return res.send(error)
-            })
-        res.redirect('/products')
+                .catch(function (error) {
+                    return res.send(error)
+                })
+        } else { return res.render("pages/productosCreate", { errors: errors.errors }) }
+
     },
 
-
-    
 
 
     detail: function (req, res) {
         let pedidoProducto = req.params.id;
         db.Product.findAll(
-             {include:"category"}
+            { include: "category" }
         )
             .then(function (productos) {
                 for (let i = 0; i < productos.length; i++) {
@@ -91,6 +108,10 @@ module.exports = {
 
 
     update: function (req, res) {
+
+        let errors = validationResult(req)
+        if (errors.isEmpty()) {
+
         db.Product.update({
             name: req.body.name,
             age: req.body.age,
@@ -101,36 +122,45 @@ module.exports = {
                 id: req.params.id
             }
         })
-        .then(function(){
-            return res.redirect("../"+req.params.id)
-        })
-        .catch(function(error) {
-            res.send(error)
-       })
-    },
+            .then(function (result) {
+                console.log(result)
+                if (result==1){
+                    return res.redirect("../" + req.params.id)
+                }
 
-    
-    delete: function (req, res){
-        db.Product.destroy({ 
-            where: {
-                 id: req.params.id
-                 }
+
             })
-         .then(function(resultado) {
-             res.redirect('/products')
-         })
-         .catch(function(error) {
-              res.send(error)
-         })
+            .catch(function (error) {
+                res.send(error)
+            })
+   } else { 
+        res.json(errors)
+
+    }
+},
+
+
+    delete: function (req, res) {
+        db.Product.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(function (resultado) {
+                res.redirect('/products')
+            })
+            .catch(function (error) {
+                res.send(error)
+            })
     },
 
     searchView: function (req, res) {
-        res.render('pages/search',{
-            productos:0
+        res.render('pages/search', {
+            productos: 0
         });
     },
 
-    search: function(req, res) {
+    search: function (req, res) {
         db.Product.findAll({
             where: {
                 name: {
@@ -138,12 +168,12 @@ module.exports = {
                 }
             }
         })
-        .then(function(productos) {
-            return res.render('pages/search', {
-                productos: productos,
-                searchQuery: req.query.search
+            .then(function (productos) {
+                return res.render('pages/search', {
+                    productos: productos,
+                    searchQuery: req.query.search
+                })
             })
-        })
     },
 
 

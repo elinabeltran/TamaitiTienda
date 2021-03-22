@@ -3,7 +3,7 @@ const { check, validationResult, body } = require("express-validator")
 const db = require('../database/models');
 const guestMdidleware= require('../middlewares/guestMiddleware');
 const upload = require('../middlewares/multerMiddleware');
-
+const path = require('path');
 
 
 const userController = require('../controllers/userController');
@@ -15,22 +15,6 @@ router.post('/', upload.any(), [
   check("lastName").isLength({ min: 1 }).withMessage("El campo apellido debe estar completo"),
   check("email").isEmail().withMessage("El email debe ser un email válido"),
   check("password").isLength({ min: 8 }).withMessage("La contraseña debe tener al menos 8 caracteres"),
-   
-
-  // body("email").custom(
-  //   function (value) {
-  //   db.User.findOne({
-  //     where: {
-  //       email: value
-  //     }
-  //   })
-  //     .then(function (resultado) {
-  //       if (!resultado == null) {
-  //         return true;
-  //      }       return false
-
-  //      })
-  //   }).withMessage("El email de usuario ya existe."),
 
 ], userController.register);
 
