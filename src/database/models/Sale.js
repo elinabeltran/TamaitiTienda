@@ -23,6 +23,12 @@ module.exports = function (sequelize, dataTypes){
     }
    
     const Sale = sequelize.define(alias, cols, config)
+
+    // Sale.associate = function(models){
+    //     Product.hasMany(models.Product,{
+    //         foreignKey:"id_product"
+    //     });
+    // }
     
     return Sale
 

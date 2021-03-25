@@ -4,8 +4,10 @@ const { check, validationResult, body } = require("express-validator");
 
 module.exports = {
     index: function (req, res) {
-        db.Product.findAll({
-        })
+        db.Product.findAll(
+            { include: "category" }
+
+        )
             .then(function (productos) {
                 res.render("pages/products", { productos: productos })
             })
@@ -108,7 +110,6 @@ module.exports = {
 
 
     update: function (req, res) {
-
         let errors = validationResult(req)
         if (errors.isEmpty()) {
 
@@ -127,8 +128,6 @@ module.exports = {
                 if (result==1){
                     return res.redirect("../" + req.params.id)
                 }
-
-
             })
             .catch(function (error) {
                 res.send(error)
@@ -175,6 +174,29 @@ module.exports = {
                 })
             })
     },
+
+    // category: function (req, res) {
+    //     console.log(req.params.id)
+    //     db.Product.findAll(
+    //         { include: "category" },
+
+    //         {
+    //         where: {
+    //            age: {
+    //                 [db.Sequelize.Op.like]: req.params.id,
+    //             }
+    //         }
+    //     })
+    //         .then(function (productosFiltrados) {
+    //             console.log (productosFiltrados)
+    //             return res.render('pages/products', {
+    //                 productos: productos,
+    //             })
+    //         })
+    //         .catch(function (error) {
+    //             res.send(error)
+    //         })
+    // },
 
 
 }

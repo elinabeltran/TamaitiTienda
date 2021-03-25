@@ -32,6 +32,8 @@ router.get('/search', productController.searchView);
 router.get('/searchResults', productController.search);
 router.get('/cart', productController.cart);
 router.get('/:id', productController.detail);
+// router.get('/category/:id', productController.category);
+
 
 
 module.exports = router;

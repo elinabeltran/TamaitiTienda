@@ -4,7 +4,7 @@ module.exports = {
   "production": {
     "username": "elina",
     "password": "pacaPACA01!",
-    "database": "elina_tamaiti_ddbb",
+    "database": "elina_tamaiti_db",
     "host": "mysql-elina.alwaysdata.net",
     "dialect": "mysql"
   },

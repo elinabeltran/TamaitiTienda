@@ -5,6 +5,7 @@ const port = process.env.port || 3000;
 const methodOverride= require('method-override');
 const verSession= require('./src/middlewares/verSession');
 const middlewareUsuarioLogueado= require('./src/middlewares/renderUsuarioLogueado');
+const categoryFilterMiddleware= require('./src/middlewares/categoryFilterMiddleware');
 
 
 const session= require('express-session');
@@ -25,6 +26,8 @@ app.use(methodOverride('_method'));
 app.use(session({secret:"Secreto de session Tamaiti"}));
 app.use(verSession);
 app.use(middlewareUsuarioLogueado);
+app.use(categoryFilterMiddleware);
+
 
 
 

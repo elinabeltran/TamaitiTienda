@@ -7,25 +7,27 @@
 
   <ul class="enlaces">
     <li><a href="/products/search"><i class="fa fa-search "></i><span class="enlaceName">Buscar</span></a></li>
-          <% if( typeof usuarioLogueado =="undefined" ){%>
-            <li><a href="/login"><i class="fa fa-user"></i><span class="enlaceName">Ingresar</span></a></li>
-            <li><a href="/"><i class="fa  fa-cart-plus"></i> <span class="enlaceName">Mi carrito </span></a></li>
+    <% if( typeof usuarioLogueado=="undefined" ){%>
+      <li><a href="/login"><i class="fa fa-user"></i><span class="enlaceName">Ingresar</span></a></li>
+      <li><a href="/"><i class="fa  fa-cart-plus"></i> <span class="enlaceName">Mi carrito </span></a></li>
 
 
-          <% } else{ %>
+      <% } else{ %>
 
-            <li>
-     
-              <a href="/register/<%= usuarioLogueado.id%>">   
-                <!-- <img style="border-radius: 50%;height:30px; padding: auto;margin: 0px;border-style:2;" src="/uploads/avatar_user/<%= usuarioLogueado.avatar%>" alt="avatar"> -->
-                <span class="enlaceName"> 
-                  <i class="fa fa-user" style="color: #2fb26f;"></i>
-                  <%= usuarioLogueado.name%></span></a></li>
-                  <li><a href="products/cart"><i class="fa  fa-cart-plus"></i> <span class="enlaceName">Mi carrito </span></a></li>
+        <li>
 
-                  
-            <% } %>
+          <a href="/register/<%= usuarioLogueado.id%>">
+            <!-- <img style="border-radius: 50%;height:30px; padding: auto;margin: 0px;border-style:2;" src="/uploads/avatar_user/<%= usuarioLogueado.avatar%>" alt="avatar"> -->
+            <span class="enlaceName">
+              <i class="fa fa-user" style="color: #2fb26f;"></i>
+              <%= usuarioLogueado.name%>
+            </span>
+          </a>
+        </li>
+        <li><a href="products/cart"><i class="fa  fa-cart-plus"></i> <span class="enlaceName">Mi carrito </span></a>
+        </li>
 
+        <% } %>
 
 
 
@@ -34,11 +36,16 @@
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="/products">Domino</a>
-  <a href="/products">Memotest</a>
-  <a href="/products">Lotería</a>
-  <a href="/products">Rompecabezas</a>
-  <a href="/products">Kit huerta</a>
+
+  <% if( typeof category !="undefined" ){%>
+
+    <% for (let i=0; i < category.length; i++) {%>
+      <a href="/products/category/<%=category[i].id%>">
+        <%= category[i].name%>
+      </a>
+      <% }%>
+        <% }%>
+
 </div>
 
 
