@@ -8,12 +8,9 @@
 <h1 class="titlePage">Tienda Online</h1>
 
 <section class="oportunidades">
-    <h5> <%= productos.length %> RESULTADOS </h5>
+    <h5> <%= productos.length %> RESULTADOS - <%= category.name %> </h5>
  
- 
- 
-
-    
+     
     <div class="productList">
         <% for (let i=0; i < productos.length; i++) {%>
             <a href="products/<%= productos[i].id %>" class="productCard">
@@ -26,7 +23,7 @@
                         <%= productos[i].age %>
                     </h5>
                     <h5 class="edad">
-                        <%= productos[i].category.name %>
+                        <%= category.name %>
                     </h5>
 
                     <h4 class="precio">$<%= productos[i].price %>
