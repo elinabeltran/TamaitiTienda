@@ -46,27 +46,36 @@ module.exports = {
             }).then(function (created, product) {
                 // console.log(created, product)
               
-                if (created) {
-                    db.Category.findAll()
-                    .then(function (categorias) {
-                        return res.render("pages/productosCreate", {
+                db.Category.findAll()
+                .then(function (categorias) {
+                    console.log(created)
+                if (!created) {
+                         return res.render("pages/productosCreate", {
                             categorias: categorias,
                             errors: [
                                 { msg: "Ya hay registrado un producto con este nombre!" }
                             ]
                         })
-                    })
+                    
                   }
-
+                })
                 // return res.redirect("/products")
             })
                 .catch(function (error) {
                     return res.send(error)
                 })
-        } else { return res.render("pages/productosCreate", { errors: errors.errors }) }
+        } else { 
+            db.Category.findAll()
+            .then(function (categorias) {
+                return res.render("pages/productosCreate", 
+                   { categorias: categorias,
+                    errors: errors.errors})
+
+            })
+        }
+            
 
     },
-
 
 
     detail: function (req, res) {
@@ -85,6 +94,8 @@ module.exports = {
                 }
                 res.send('Los siento, no tenemos este producto registrado')
             })
+
+            
             .catch(function (error) {
                 return res.send(error)
             })
@@ -175,28 +186,29 @@ module.exports = {
             })
     },
 
-    // category: function (req, res) {
-    //     console.log(req.params.id)
-    //     db.Product.findAll(
-    //         { include: "category" },
+    category: function (req, res) {
+        db.Product.findAll(
+            {
+            where: {
+                id_category:req.params.id, 
+            }
+        })
+            .then(function (productos) {
 
-    //         {
-    //         where: {
-    //            age: {
-    //                 [db.Sequelize.Op.like]: req.params.id,
-    //             }
-    //         }
-    //     })
-    //         .then(function (productosFiltrados) {
-    //             console.log (productosFiltrados)
-    //             return res.render('pages/products', {
-    //                 productos: productos,
-    //             })
-    //         })
-    //         .catch(function (error) {
-    //             res.send(error)
-    //         })
-    // },
+                db.Category.findByPk (req.params.id)
+                .then(function (category) {
+                    console.log(category.name)
+                    return res.render('pages/productsCategoria', {
+                        category: category,
+                        productos: productos,
+                    })
+                })
+
+            })
+            .catch(function (error) {
+                res.send(error)
+            })
+    },
 
 
 }

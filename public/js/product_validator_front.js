@@ -41,10 +41,6 @@ window.addEventListener('load', function () {
             for (let i = 0; i < arrayErrors.length; i++) {
                 ulDeErrores.innerHTML += "<li>" + arrayErrors[i] + "</li>"
             }
-
         }
-
     })
-
-
 });

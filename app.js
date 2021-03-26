@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 const methodOverride= require('method-override');
 const verSession= require('./src/middlewares/verSession');
 const middlewareUsuarioLogueado= require('./src/middlewares/renderUsuarioLogueado');
@@ -39,5 +39,5 @@ app.use(function(req, res, next) {
 
 
 app.listen(port, function(){
-    console.log(`El servidor esta funcionando sobre http://localhost:3000`)
+    console.log(`El servidor esta funcionando sobre http://localhost:${process.env.PORT}`)
 })
