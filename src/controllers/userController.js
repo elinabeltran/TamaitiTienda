@@ -35,6 +35,7 @@ module.exports = {
                             email: usuarioALoguear.email,
                             avatar: usuarioALoguear.avatar,
                             id: usuarioALoguear.id,
+                            rol: usuarioALoguear.rol
                         };
                         return res.render("pages/userPerfil", { user: usuarioALoguear })
                     } else {
@@ -46,7 +47,6 @@ module.exports = {
                     }
                 }
                 else {
-
                     return res.render("pages/login", {
                         errors: [
                             { msg: "Credenciales invalidas si no tienes cuenta. Registrate!" }
@@ -59,7 +59,6 @@ module.exports = {
                     return res.send(error)
                 })
         }
-
     },
 
     registerBoard: function (req, res) {

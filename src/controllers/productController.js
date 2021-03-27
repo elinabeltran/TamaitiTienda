@@ -86,7 +86,7 @@ module.exports = {
             .then(function (productos) {
                 for (let i = 0; i < productos.length; i++) {
                     if (pedidoProducto == productos[i].id) {
-                        res.render('pages/details', {
+                      return  res.render('pages/details', {
                             elProducto: productos[i],
                             productos: productos
                         })

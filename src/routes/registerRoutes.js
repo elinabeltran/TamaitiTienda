@@ -1,15 +1,16 @@
 const express = require('express');
 const { check, validationResult, body } = require("express-validator")
-const db = require('../database/models');
-const guestMdidleware= require('../middlewares/guestMiddleware');
-const upload = require('../middlewares/multerMiddleware');
-const path = require('path');
-
-
 const userController = require('../controllers/userController');
 const router = express.Router();
 
-router.get('/',guestMdidleware, userController.registerBoard);
+const onlyUsers = require('../middlewares/autoriceMiddleware');
+const guestMiddleware= require('../middlewares/guestMiddleware');
+const upload = require('../middlewares/multerMiddleware');
+
+
+
+
+router.get('/',guestMiddleware, userController.registerBoard);
 router.post('/', upload.any(), [
   check("name").isLength({ min: 1 }).withMessage("El campo nombre debe estar completo"),
   check("lastName").isLength({ min: 1 }).withMessage("El campo apellido debe estar completo"),
@@ -18,9 +19,9 @@ router.post('/', upload.any(), [
 
 ], userController.register);
 
-router.get('/:id', userController.detail);
-router.get('/edit/:id', userController.editBoard);
-router.put('/update/:id', userController.update);
+router.get('/:id', onlyUsers, userController.detail);
+router.get('/edit/:id',onlyUsers, userController.editBoard);
+router.put('/update/:id',onlyUsers, userController.update);
 
 
 

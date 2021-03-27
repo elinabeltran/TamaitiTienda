@@ -6,3 +6,4 @@ module.exports = function (req, res, next) {
     next()
 }
 
+/// agregar el rol en tabla y en las VISTAS pregunto si rol es 0 o 1 - si es uno veo los configuraciones

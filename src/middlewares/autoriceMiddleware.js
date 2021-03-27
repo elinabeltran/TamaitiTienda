@@ -6,7 +6,7 @@ function autoriceMiddleware(req, res, next) {
         let elMensaje="Para acceder a esta página debes loguearte. ";
         res.render ("pages/msgError", {elMensaje})
     }
-    next()
+    
 }
 
 module.exports = autoriceMiddleware;

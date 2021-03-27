@@ -4,7 +4,9 @@ const upload = require('../middlewares/multerMiddlewareImgProduct');
 const path = require('path');
 const productController = require('../controllers/productController');
 const { check, validationResult, body } = require("express-validator");
+
 const onlyUsers = require('../middlewares/autoriceMiddleware');
+const validatorLoginMiddleware = require('../middlewares/validatorLoginMiddleware');
 
 
 
@@ -41,7 +43,7 @@ router.delete('/delete/:id', productController.delete);
 
 router.get('/cart', productController.cart);
 
-router.get('/:id', productController.detail);
+router.get('/:id',validatorLoginMiddleware, productController.detail);
 
 
 // router.get('/category/:id', productController.category);

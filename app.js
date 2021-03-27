@@ -39,5 +39,5 @@ app.use(function(req, res, next) {
 
 
 app.listen(port, function(){
-    console.log(`El servidor esta funcionando sobre http://localhost:${process.env.PORT}`)
+    console.log(`El servidor esta funcionando sobre http://localhost:${port}`)
 })
