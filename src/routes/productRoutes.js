@@ -9,8 +9,6 @@ const onlyUsers = require('../middlewares/autoriceMiddleware');
 const validatorLoginMiddleware = require('../middlewares/validatorLoginMiddleware');
 
 
-
-
 router.get('/', productController.index);
 router.get('/search', productController.searchView);
 router.get('/searchResults', productController.search);

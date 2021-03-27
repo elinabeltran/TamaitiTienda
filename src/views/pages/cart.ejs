@@ -1,24 +1,60 @@
 <%- include('../partials/head'); %>
-<body>
 
-    <header>
-        <%- include('../partials/header'); %>
-    </header>
+    <body>
 
-<h1 class="titlePage">Carrito de productos</h1>
-<section class="oportunidades">
-
-    <h5> TU COMPRA  </h5>
-
-    <div class="productList">
-   
-    </div>
-</section>
+        <header>
+            <%- include('../partials/header'); %>
+        </header>
 
 
+        <section class="cart">
+            <h1 class="titlePage">Carrito de productos</h1>
 
-    <footer>
-        <%- include('../partials/footer'); %>
-    </footer>
+            <div class="cartCard">
+                <ul class="cartList">
+                    <h5> TU COMPRA </h5>
 
-<%- include('../partials/closure'); %>
+                    <li class="product">
+                        <img src="https://tamaiti.herokuapp.com/uploads/img_products/Memo1614963422173.jpg" alt="">
+                        <div>
+                            <h4>EL pajaro azul y verde </h4>
+                        </div>
+                        <h3 >$4.000,-</h3>
+                        <div class="actions">
+                            <button class="btn-trash"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    </li>
+
+                    <li class="product">
+                        <img src="https://tamaiti.herokuapp.com/uploads/img_products/Memo1614963422173.jpg" alt="">
+                        <div>
+                            <h4>EL pajaro azul y verde </h4>
+                        </div>
+                        <h3 >$4.000,-</h3>
+                        <div class="actions">
+                            <button class="btn-trash"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    </li>
+
+
+
+                    <li class="total">
+                        <h4>TOTAL</h2>
+                            <h2>$4.000,-</h2>
+                        </li>
+                </ul>
+
+                <button class="btn-trash">CONFIRMAR COMPRA</button>
+
+            
+            </div>
+
+        </section>
+
+
+
+        <footer>
+            <%- include('../partials/footer'); %>
+        </footer>
+
+        <%- include('../partials/closure'); %>
