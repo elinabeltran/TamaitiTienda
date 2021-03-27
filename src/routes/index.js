@@ -7,6 +7,7 @@ const loginRouter = require('./loginRoutes');
 const registerRouter = require('./registerRoutes');
 const productsRouter = require('./productRoutes');
 const apiProductsRouter = require('./api/productRoutes');
+const apiUsersRouter = require('./api/userRoutes');
 
 
 
@@ -16,6 +17,7 @@ router.use('/login', loginRouter);
 router.use('/register', registerRouter); 
 router.use('/products', productsRouter);          
 router.use('/api/products', apiProductsRouter);                             
+router.use('/api/users', apiUsersRouter);                             
 
 
 

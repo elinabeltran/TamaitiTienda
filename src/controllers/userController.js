@@ -109,7 +109,11 @@ module.exports = {
 
 
     detail: function (req, res) {
-        db.User.findByPk(req.params.id)
+        db.User.findByPk(req.params.id,
+            {
+                attributes: ['name', 'last_name', "id", "avatar", "email"]
+            })
+
             .then(function (user) {
                 res.render("pages/userPerfil", { user: user })
             })
@@ -119,7 +123,10 @@ module.exports = {
     },
 
     editBoard: function (req, res) {
-        db.User.findByPk(req.params.id)
+        db.User.findByPk(req.params.id,
+            {
+                attributes: ['name', 'last_name', "id", "avatar", "email"]
+            })
             .then(function (user) {
                 res.render("pages/userEdit", { user: user })
             })

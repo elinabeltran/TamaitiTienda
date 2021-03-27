@@ -19,16 +19,14 @@ module.exports = {
                 }
                 res.json(respuestaApi)
             })
-            .catch(function (error) {
-                return res.send(error)
+            .catch(function () {
+                res.json({ status: 500 })
             })
     },
 
     detail: function (req, res) {
-        db.Product.findOne({
+        db.Product.findByPk(req.params.id, {
             include: "category"
-        }, {
-            where: { id: req.params.id }
         })
             .then(function (producto) {
                 let respuestaApi = {
@@ -40,27 +38,29 @@ module.exports = {
                 }
                 res.json(respuestaApi)
             })
-            .catch(function (error) {
-                return res.send(error)
+            .catch(function () {
+                res.json({ status: 500 })
             })
     },
 
 
     create: function (req, res) {
-        db.Product.Create({
+        db.Product.create({
             name: req.body.name,
             age: req.body.age,
             description: req.body.description,
             id_category: req.body.category,
-            img_url: req.files[0].filename,
+            img_url: req.body.image,
             price: req.body.price
         })
-        .then(function (product) {
-            res.json({
-                status: 201,
-                data:product
+            .then(function (result) {
+                res.json({
+                    status: 201,
+                })
             })
-        })
+            .catch(function () {
+                res.json({ status: 500 })
+            })
     },
 
 
@@ -69,6 +69,7 @@ module.exports = {
             name: req.body.name,
             age: req.body.age,
             description: req.body.description,
+            img_url: req.body.image,
             price: req.body.price
         }, {
             where: {
@@ -76,18 +77,26 @@ module.exports = {
             }
         })
             .then(function (result) {
-                if (result==1){
-                    return res.json({
-                        status:201,
-                    })
+                if (result == 1) {
+                    return res.json({ status: 201 })
+                } else {
+                    res.json({ status: 500 })
                 }
+            })
+    },
+
+    delete: function (req, res) {
+        db.Product.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(function () {
+                res.json({ status: 200 })
             })
             .catch(function (error) {
                 res.json(error)
             })
-},
-
-
-
+    },
 
 }
