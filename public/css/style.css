@@ -314,7 +314,8 @@ a.productCard:hover{
 
 a.productCard img {
     width: 45%;
-
+    height: auto; 
+    object-fit: cover;
 }
 a.productCard .text  {
     display:flex;
@@ -513,6 +514,7 @@ section.cart .product img{
     height: 130px; 
     object-fit: cover;
     margin-right: 10px;
+    border-radius: 10px;
     }
 
 section.cart .product h4{

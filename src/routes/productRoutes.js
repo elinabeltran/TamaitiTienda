@@ -38,7 +38,6 @@ router.put('/edit/:id',[
 
 router.delete('/delete/:id', productController.delete);
 
-
 router.get('/cart', productController.cart);
 
 router.get('/:id',validatorLoginMiddleware, productController.detail);

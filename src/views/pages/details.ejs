@@ -32,10 +32,10 @@
                         <a h href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
                         <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE"
                             method="post"><button type="submit" class="btn btn_delete">Borrar</button></form>
-                        <%}else{%>
-                            <button type="submit" class="btn">Comprar</button>
-                    <%}%>
-
+                            <%}%>
+                    <%}else{%>
+                                               
+                    <button type="submit" class="btn">Agregar al Carrito</button>
                 <%}%>
 
 
