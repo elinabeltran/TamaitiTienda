@@ -2,12 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 const userController = require('../controllers/userController');
-const validatorLoginMiddleware = require('../middlewares/validatorLoginMiddleware');
+const validationLogin = require('../middlewares/validations/validatorLoginMiddleware');
 const guestMiddleware= require('../middlewares/guestMiddleware');
 
 
 router.get('/', guestMiddleware, userController.boardLogin);
-router.post('/', validatorLoginMiddleware,userController.login);
+router.post('/', validationLogin,userController.login);
+
+
+
+
+
+/////Ruta de prueba de session y login
 
 router.get('/check', 
 function(req,res){

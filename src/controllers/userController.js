@@ -21,7 +21,6 @@ module.exports = {
                 errors: errors.errors,
             })
         } else {
-
             db.User.findOne({
                 where: {
                     email: req.body.email
@@ -36,8 +35,12 @@ module.exports = {
                             avatar: usuarioALoguear.avatar,
                             id: usuarioALoguear.id,
                             rol: usuarioALoguear.rol
-                        };
-                        return res.render("pages/userPerfil", { user: usuarioALoguear })
+                        }
+                        if (req.body.recordame != undefined){
+                            res.cookie("recordame", usuarioALoguear.email, {maxAge:60000})
+                        }
+                        
+                        res.redirect("/")
                     } else {
                         return res.render("pages/login", {
                             errors: [
@@ -149,6 +152,13 @@ module.exports = {
             return res.redirect("../" + id)
 
         })
+    },
+
+
+    logout: function (req, res){
+        req.session.destroy();
+        res.render('pages/login')
     }
 }
+
 

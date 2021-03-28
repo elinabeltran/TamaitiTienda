@@ -8,8 +8,6 @@ const guestMiddleware= require('../middlewares/guestMiddleware');
 const upload = require('../middlewares/multerMiddleware');
 
 
-
-
 router.get('/',guestMiddleware, userController.registerBoard);
 router.post('/', upload.any(), [
   check("name").isLength({ min: 1 }).withMessage("El campo nombre debe estar completo"),
@@ -23,6 +21,6 @@ router.get('/:id', onlyUsers, userController.detail);
 router.get('/edit/:id',onlyUsers, userController.editBoard);
 router.put('/update/:id',onlyUsers, userController.update);
 
-
+router.get('/cerrarsesion', userController.logout)
 
 module.exports = router;

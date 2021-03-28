@@ -26,15 +26,15 @@
 
                 <!-- <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6> -->
 
-                <% if( typeof usuarioLogueado !="undefined" ){%>
-                    <% if(usuarioLogueado.rol==1){%>
-                        <button type="submit" class="btn">Comprar</button>
+                <% if( typeof usuarioLogueado !="undefined" && usuarioLogueado.rol==1 ){%>
+                
+                        <button type="submit" class="btn">Agregar al Carrito</button>
                         <a h href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
                         <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE"
-                            method="post"><button type="submit" class="btn btn_delete">Borrar</button></form>
-                            <%}%>
+                        method="post"><button type="submit" class="btn btn_delete">Borrar</button></form>
+
                     <%}else{%>
-                                               
+                                              
                     <button type="submit" class="btn">Agregar al Carrito</button>
                 <%}%>
 

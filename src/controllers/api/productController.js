@@ -24,19 +24,25 @@ module.exports = {
             })
     },
 
+
+
     detail: function (req, res) {
         db.Product.findByPk(req.params.id, {
             include: "category"
         })
             .then(function (producto) {
-                let respuestaApi = {
-                    meta: {
-                        status: 200,
-                        url: "/api/products/" + producto.id,
-                    },
-                    data: producto
+                if (producto != undefined) {
+                    let respuestaApi = {
+                        meta: {
+                            status: 200,
+                            url: "/api/products/" + producto.id,
+                        },
+                        data: producto
+                    }
+                    return res.json(respuestaApi)
+                } else {
+                    return res.json({ status: 204 })
                 }
-                res.json(respuestaApi)
             })
             .catch(function () {
                 res.json({ status: 500 })
@@ -94,8 +100,37 @@ module.exports = {
             .then(function () {
                 res.json({ status: 200 })
             })
-            .catch(function (error) {
-                res.json(error)
+            .catch(function () {
+                res.json({ status: 500 })
+            })
+    },
+
+    listFilter: function (req, res) {
+        db.Product.findAll({
+            include: "category",
+            where: {
+                id_category: req.params.id,
+            }
+        })
+
+            .then(function (productosFiltrados) {
+                if (productosFiltrados.length > 0) {
+                    let respuestaApi = {
+                        meta: {
+                            status: 200,
+                            category_name: productosFiltrados[1].category.name,
+                            url: "/api/products/category/" + req.params.id,
+                            total: productosFiltrados.length
+                        },
+                        data: productosFiltrados
+                    }
+                    return res.json(respuestaApi)
+                } else {
+                    return res.json({ status: 204 })
+                }
+            })
+            .catch(function () {
+                res.json({ status: 500 })
             })
     },
 

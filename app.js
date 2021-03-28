@@ -3,12 +3,13 @@ const app = express();
 const path = require('path');
 const port = process.env.PORT || 3000;
 const methodOverride= require('method-override');
+const session= require('express-session');
+const cookieParser= require('cookie-parser')
+
 const verSession= require('./src/middlewares/verSession');
 const middlewareUsuarioLogueado= require('./src/middlewares/renderUsuarioLogueado');
 const categoryFilterMiddleware= require('./src/middlewares/categoryFilterMiddleware');
-
-
-const session= require('express-session');
+const recordUserMiddleware= require('./src/middlewares/recordUserMiddleware');
 
 
 const indexRouter = require('./src/routes/index');
@@ -25,10 +26,10 @@ app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(session({secret:"Secreto de session Tamaiti"}));
 app.use(verSession);
+app.use(cookieParser())
 app.use(middlewareUsuarioLogueado);
 app.use(categoryFilterMiddleware);
-
-
+app.use(recordUserMiddleware);
 
 
 
