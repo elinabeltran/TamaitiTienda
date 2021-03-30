@@ -59,7 +59,7 @@ module.exports = {
                     
                   }
                 })
-                // return res.redirect("/products")
+                return res.redirect("/products")
             })
                 .catch(function (error) {
                     return res.send(error)

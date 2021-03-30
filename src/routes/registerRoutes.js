@@ -21,6 +21,5 @@ router.get('/:id', onlyUsers, userController.detail);
 router.get('/edit/:id',onlyUsers, userController.editBoard);
 router.put('/update/:id',onlyUsers, userController.update);
 
-router.get('/cerrarsesion', userController.logout)
 
 module.exports = router;

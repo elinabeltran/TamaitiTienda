@@ -29,10 +29,27 @@
 
         <% } %>
 
-
-
   </ul>
 </nav>
+
+
+
+
+<nav id="menu" class="menu">
+  <ul class="enlaces" >
+    <li><a href="/products/search"><span class="">Nuevo Producto</span></a></li>
+  </ul>
+</nav>
+
+
+
+
+
+
+
+
+
+
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -40,7 +57,7 @@
   <% if( typeof category !="undefined" ){%>
 
     <% for (let i=0; i < category.length; i++) {%>
-      <a href="products/category/<%=category[i].id%>">
+      <a href="/products/category/<%=category[i].id%>">
         <%= category[i].name%>
       </a>
       <% }%>

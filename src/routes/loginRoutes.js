@@ -8,6 +8,8 @@ const guestMiddleware= require('../middlewares/guestMiddleware');
 
 router.get('/', guestMiddleware, userController.boardLogin);
 router.post('/', validationLogin,userController.login);
+router.get('/cerrarsesion', userController.logout);
+
 
 
 
