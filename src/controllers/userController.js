@@ -157,7 +157,7 @@ module.exports = {
 
     logout: function (req, res){
         req.session.destroy();
-        res.render('pages/login')
+        res.redirect('./')
     }
 }
 

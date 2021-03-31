@@ -126,6 +126,81 @@ header nav.menu i {
 }
 
 
+
+
+
+
+header nav.menuAdmin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    background-color:#fff;
+
+}
+
+
+header nav.menuAdmin a.btn-menu {
+ border-radius: 30px;
+ color:#373737a8;
+ text-decoration: none;
+ font-size:1.3em;
+ margin-right:5px;
+
+}
+
+header nav.menuAdmin ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    align-items: center;
+    flex-grow: 1;
+    background-color:#4fb6a51f ;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    font-size: small;
+}
+
+header nav.menuAdmin ul li {
+    margin-left: 20px;
+}
+header nav.menuAdmin ul li:first-child {
+    margin-left: 0;
+}
+header nav.menuAdmin ul li a, a.btn-menu {
+    color:#4fb6a5;
+    text-decoration: none;
+    font-size:1em;
+    padding: 6px;
+    border-radius: 8px;
+    border: solid 1px #4fb6a500;
+
+
+}
+header nav.menuAdmin ul li a:hover, a:hover.btn-menu{
+    border: solid 1px #4fb6a5;
+}
+
+header nav.menuAdmin ul li a.btnNewProduct{
+    color:#fff;
+background-color:#4fb6a5;
+}
+
+
+header nav.menuAdmin ul li a:hover.btnNewProduct{
+    color:#fff;
+background-color:#3ba190;
+}
+
+header nav.menuAdmin i {
+    margin-right:8px ;
+    font-size:1.3em;
+}
+
+
+
+
 header .sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
@@ -565,16 +640,6 @@ section.cart .total{
     }
 
 
-section.cart .product h2 {
-        /* font-size: 50px;
-        font-family: 'Grandstander';
-        line-height: 50px;
-        font-weight: 500;
-        color: #fff;
-        text-shadow: 2px 2px 1px rgb(61, 165, 156); */
-
-    }
-
 
 
  /* ================================
@@ -607,6 +672,8 @@ section.cart .product h2 {
     } 
 
 
+
+
 @media(max-width:375px){
     header nav.menu  {
         flex-direction: column;
@@ -619,13 +686,11 @@ section.cart .product h2 {
         justify-content:stretch ;
         align-items: center;
         padding:5px;
-
     }
-
 
 header nav.menu ul {
     width: 100%;
-    height: 80px;
+    height: 60px;
     justify-content: center;
     background-color: #4fb6a510;
    }
@@ -652,10 +717,95 @@ a.bannerTienda{
     }    
 
 
-
 .form{
     padding: 0 5%;
 }
+
+
+
+header nav.menuAdmin ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap-reverse;
+    list-style-type: none;
+    align-items: center ;
+    flex-grow: 1;
+    background-color:#4fb6a51f ;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    font-size: small;
+    margin-top: 10px;
+
+}
+
+header nav.menuAdmin ul li {
+    margin-left: 0px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    min-width:130px;
+
+}
+header nav.menuAdmin ul li:first-child {
+    margin-left: 0;
+}
+
+
+header nav.menuAdmin ul li a.btnNewProduct{
+    color:#fff;
+    padding: 8px 60px;
+background-color:#4fb6a5;
+
+}
+
+
+
+
+
+section div.cartCard{
+    width: 100%;
+
+}
+
+section.cart ul{
+margin-bottom: 10px;
+}
+
+section.cart li.product{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items:center;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: solid 1px #81818163;
+}
+
+section.cart .product img{
+  width: 60px; 
+  height: 60px; 
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 10px;
+  }
+
+section.cart .product h4{
+  margin: 10px;
+  max-width: 200px;
+  color:#373737a8
+}
+
+
+
+
+
+  
+
+
+
+
+
 
 /* ================================
 - Style Product Details page

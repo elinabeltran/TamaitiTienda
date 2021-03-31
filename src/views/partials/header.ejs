@@ -11,15 +11,14 @@
       <li><a href="/login"><i class="fa fa-user"></i><span class="enlaceName">Ingresar</span></a></li>
       <li><a href="/products/cart"><i class="fa  fa-cart-plus"></i> <span class="enlaceName">Mi carrito </span></a></li>
 
-
       <% } else{ %>
 
         <li>
 
-          <a href="/register/<%= usuarioLogueado.id%>">
+          <a href="/register/<%= usuarioLogueado.id%>"><i class="fa fa-user" style="color: #2fb26f;"></i>
+
             <!-- <img style="border-radius: 50%;height:30px; padding: auto;margin: 0px;border-style:2;" src="/uploads/avatar_user/<%= usuarioLogueado.avatar%>" alt="avatar"> -->
             <span class="enlaceName">
-              <i class="fa fa-user" style="color: #2fb26f;"></i>
               <%= usuarioLogueado.name%>
             </span>
           </a>
@@ -28,18 +27,22 @@
         </li>
 
         <% } %>
-
   </ul>
 </nav>
 
+<% if ( typeof usuarioLogueado!="undefined" && usuarioLogueado.rol ==1){ %>
 
+  <nav id="menuAdmin" class="menuAdmin">
+    <ul class="enlacesAdmin" >
+      <li><a href="/products"><span class="">Tienda Online</span></a></li>
+      <li><a href="/login/cerrarsesion"><span class="">Cerrar Sesión</span></a></li>
+      <li><a href="/products/lastest"><span class="">Ultimos Cargados</span></a></li>
+      <li><a href="/products/create" class="btnNewProduct"><span >Nuevo Producto</span></a></li>
+    </ul>
+  </nav>
 
+  <% } %>
 
-<nav id="menu" class="menu">
-  <ul class="enlaces" >
-    <li><a href="/products/search"><span class="">Nuevo Producto</span></a></li>
-  </ul>
-</nav>
 
 
 
