@@ -388,9 +388,11 @@ a.productCard:hover{
  }
 
 a.productCard img {
-    width: 45%;
-    height: auto; 
+    width: 40%;
+    height: 160px; 
+    margin-right: 10px;
     object-fit: cover;
+    border-radius: 8px;
 }
 a.productCard .text  {
     display:flex;

@@ -5,8 +5,12 @@ const { check, validationResult, body } = require("express-validator");
 module.exports = {
     index: function (req, res) {
         db.Product.findAll(
-            { include: "category" }
-
+            { include: "category",
+             limit: 6,
+             order: [
+                ['id', 'DESC'],
+            ],
+        },
         )
             .then(function (productos) {
                 res.render("pages/products", { productos: productos })
@@ -59,7 +63,9 @@ module.exports = {
                     
                   }
                 })
+
                 return res.redirect("/products")
+
             })
                 .catch(function (error) {
                     return res.send(error)
@@ -73,7 +79,6 @@ module.exports = {
 
             })
         }
-            
 
     },
 
@@ -128,7 +133,9 @@ module.exports = {
             name: req.body.name,
             age: req.body.age,
             description: req.body.description,
-            price: req.body.price
+            price: req.body.price,
+            id_category: req.body.category,
+            // img_url: req.files[0].filename
         }, {
             where: {
                 id: req.params.id

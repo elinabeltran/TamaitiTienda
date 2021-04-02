@@ -24,11 +24,11 @@ window.addEventListener('load', function () {
 
         if (image.value == "") {
             arrayErrors.push('Debes adjuntar una imagen de producto.')
-           
+          
         }
 
         if (!(/\.(jpg|png|jpeg)$/i).test(image.value)) {
-            arrayErrors.push('Debes carga una imagen con formato válido (jpg|png|jpeg)');
+            arrayErrors.push('Debes carga una imagen con formato válido (JPG | PNG | JPEG)');
         }
 
         if (category.value == "") {

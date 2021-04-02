@@ -3,7 +3,6 @@
 
     <header>
         <%- include('../partials/header'); %>
-        <!-- <script src="/js/product_validator_front.js"></script> -->
 
     </header>
 
@@ -20,7 +19,6 @@
               <%}%>
           </ul> 
           </div>
-
        <%}%>
      
       <div class="errors-group">
@@ -28,7 +26,7 @@
       </div>
 
         <div id="createProduct" class="form">
-            <form  class="createProductForm" action="<%=elProducto.id%>?_method=PUT" autocomplete="on" method="POST"> 
+            <form  class="createProductForm" action="<%=elProducto.id%>?_method=PUT" autocomplete="on" method="POST" enctype="multipart/form-data"> 
 
               <div class="form-group">
                 <label for="" class="" >Nombre del producto </label>
@@ -42,7 +40,7 @@
 
            <!-- <div class="form-group">
                 <label for="" class="" >Carga la imagen </label>
-                <input id="image" name="image" class="form-control" " type="file" placeholder="Imagen de producto" />
+                <input id="image" name="image" class="form-control" " type="file" placeholder="Imagen de producto" value="<%=elProducto.img_url%>"/>
             </div>   -->
 
 
@@ -59,7 +57,6 @@
                 <option value="6 a 9 años">6 a 9 años</option>
                 <option value="+9 años">+9 años</option>
                  </select>
-
             </div>
 
 
