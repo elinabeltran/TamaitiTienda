@@ -4,6 +4,8 @@
 
         <header>
             <%- include('../partials/header'); %>
+            <script src="/js/cart.js"></script>
+
         </header>
 
         <h1 class="titlePage">Detalle de <%= elProducto.name %>
@@ -11,46 +13,46 @@
         <div class="productDetail">
             <img src="/uploads/img_products/<%= elProducto.img_url %>" alt="<%= elProducto.name %>">
             <div class="text">
-                <h3 class="title">Juego: <%= elProducto.name %>
+                <label>Juego: </label>
+                <h3 class="title">
+                    <%= elProducto.name %>
                 </h3>
 
+
                 <h5 class="edad">
-                    <%= elProducto.age %>
+                    <%= elProducto.category.name %> | <%= elProducto.age %>
                 </h5>
-                <h4 class="precio">$ <%= elProducto.price %>
-                </h4>
-                <h5 class="precio edad">
-                    <%= elProducto.category.name %>
-                </h5>
+                <h2 class="precio" style="color: #000;">$ <%= elProducto.price %>
+                </h2>
                 <br>
 
                 <!-- <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6> -->
 
                 <% if( typeof usuarioLogueado !="undefined" && usuarioLogueado.rol==1 ){%>
-                
-                        <button type="submit" class="btn">Agregar al Carrito</button>
-                        <a h href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
-                        <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE"
-                        method="post"><button type="submit" class="btn btn_delete">Borrar</button></form>
+
+                    <button type="submit" class="btn">Agregar al Carrito</button>
+                    <a h href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
+                    <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE" method="post">
+                        <button type="submit" class="btn btn_delete">Borrar</button></form>
 
                     <%}else{%>
-                                              
-                    <button type="submit" class="btn">Agregar al Carrito</button>
-                <%}%>
+<!-- 
+                        <form style="margin-top: 10px;" action="<%= elProducto.id %>" method="GET">
+                            <button type="submit" id="addCart" class="add-cart btn">Agregar al Carrito</button></form>
+ -->
 
+                        <button type="submit" id="addCart" class="add-cart btn">Agregar al Carrito</button>
 
+                    <%}%>
 
             </div>
         </div>
         <br>
         <div class="productInfo">
-            <h7><b>Características:</b></h7>
+            <label>Características: </label>
             <br>
             <br>
-
-            <p>
-                <%= elProducto.description %>
-            </p>
+            <p><%= elProducto.description %></p>
         </div>
 
         <br>

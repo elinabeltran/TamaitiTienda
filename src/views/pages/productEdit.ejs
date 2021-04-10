@@ -38,15 +38,17 @@
                 <input id="description" name="description"  class="form-control"  type="text" placeholder="Descripción del producto" value="<%=elProducto.description%>"/> 
               </div>
 
-           <!-- <div class="form-group">
-                <label for="" class="" >Carga la imagen </label>
-                <input id="image" name="image" class="form-control" " type="file" placeholder="Imagen de producto" value="<%=elProducto.img_url%>"/>
-            </div>   -->
+              <img style="width: 100px;" src="/uploads/img_products/<%= elProducto.img_url %>" alt="<%= elProducto.name %>">
+
+              <div class="form-group">
+                <label for="" class="" >Cambiar imagen la imagen </label>
+                <input id="image" name="image" class="form-control" " type="file" placeholder="Imagen de producto" />
+            </div>  
 
 
             <div class="form-group">
               <label for="" class="" >Precio </label>
-              <input id="price" name="price" class="form-control" type="number" placeholder="$1.111" value="<%=elProducto.price%>" /> 
+              <input id="price" name="price" class="form-control" type="number" placeholder=<%=elProducto.price%> value="<%=elProducto.price%>" /> 
             </div>
 
             <div class="form-group">

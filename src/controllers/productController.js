@@ -1,16 +1,19 @@
 const db = require('../database/models');
+const sequelize = db.sequelize;
+
 const { check, validationResult, body } = require("express-validator");
 
 
 module.exports = {
     index: function (req, res) {
         db.Product.findAll(
-            { include: "category",
-             limit: 6,
-             order: [
-                ['id', 'DESC'],
-            ],
-        },
+            {
+                include: "category",
+                limit: 10,
+                order: [
+                    ['id', 'DESC'],
+                ],
+            },
         )
             .then(function (productos) {
                 res.render("pages/products", { productos: productos })
@@ -49,20 +52,20 @@ module.exports = {
                 }
             }).then(function (created, product) {
                 // console.log(created, product)
-              
+
                 db.Category.findAll()
-                .then(function (categorias) {
-                    console.log(created)
-                if (!created) {
-                         return res.render("pages/productosCreate", {
-                            categorias: categorias,
-                            errors: [
-                                { msg: "Ya hay registrado un producto con este nombre!" }
-                            ]
-                        })
-                    
-                  }
-                })
+                    .then(function (categorias) {
+                        console.log(created)
+                        if (!created) {
+                            return res.render("pages/productosCreate", {
+                                categorias: categorias,
+                                errors: [
+                                    { msg: "Ya hay registrado un producto con este nombre!" }
+                                ]
+                            })
+
+                        }
+                    })
 
                 return res.redirect("/products")
 
@@ -70,20 +73,37 @@ module.exports = {
                 .catch(function (error) {
                     return res.send(error)
                 })
-        } else { 
+        } else {
             db.Category.findAll()
-            .then(function (categorias) {
-                return res.render("pages/productosCreate", 
-                   { categorias: categorias,
-                    errors: errors.errors})
+                .then(function (categorias) {
+                    return res.render("pages/productosCreate",
+                        {
+                            categorias: categorias,
+                            errors: errors.errors
+                        })
 
-            })
+                })
         }
 
     },
+////-----------COMIENZA Prueba raw query
 
+    // detailPrueba: function (req, res) {
+    //     sequelize.query("SELECT * FROM product where id = " + req.params.id)
+    //     .then (function(resultado){
+    //         let product = resultado[0];
+    //         res.send(product)
+
+    //     })
+    //     .catch(function (error) {
+    //         return res.send(error)
+    //     })
+    // },
+////-----------FIN Prueba raw query
 
     detail: function (req, res) {
+
+  
         let pedidoProducto = req.params.id;
         db.Product.findAll(
             { include: "category" }
@@ -91,7 +111,7 @@ module.exports = {
             .then(function (productos) {
                 for (let i = 0; i < productos.length; i++) {
                     if (pedidoProducto == productos[i].id) {
-                      return  res.render('pages/details', {
+                        return res.render('pages/details', {
                             elProducto: productos[i],
                             productos: productos
                         })
@@ -100,7 +120,7 @@ module.exports = {
                 res.send('Los siento, no tenemos este producto registrado')
             })
 
-            
+
             .catch(function (error) {
                 return res.send(error)
             })
@@ -129,32 +149,61 @@ module.exports = {
         let errors = validationResult(req)
         if (errors.isEmpty()) {
 
-        db.Product.update({
-            name: req.body.name,
-            age: req.body.age,
-            description: req.body.description,
-            price: req.body.price,
-            id_category: req.body.category,
-            // img_url: req.files[0].filename
-        }, {
-            where: {
-                id: req.params.id
-            }
-        })
-            .then(function (result) {
-                console.log(result)
-                if (result==1){
-                    return res.redirect("../" + req.params.id)
-                }
-            })
-            .catch(function (error) {
-                res.send(error)
-            })
-   } else { 
-        res.json(errors)
+            if (req.files[0] === undefined) {
+                db.Product.update({
+                    name: req.body.name,
+                    age: req.body.age,
+                    description: req.body.description,
+                    price: req.body.price,
+                    id_category: req.body.category,
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                })
 
-    }
-},
+                    .then(function (result) {
+                        console.log(result)
+                        if (result == 1) {
+                            return res.redirect("../" + req.params.id)
+                        }
+                    })
+                    .catch(function (error) {
+                        res.send(error)
+                    })
+
+            } else {
+                db.Product.update({
+                    name: req.body.name,
+                    age: req.body.age,
+                    description: req.body.description,
+                    price: req.body.price,
+                    id_category: req.body.category,
+                    id_category: req.body.category,
+                    img_url: req.files[0].filename,
+
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                })
+
+                    .then(function (result) {
+                        console.log(result)
+                        if (result == 1) {
+                            return res.redirect("../" + req.params.id)
+                        }
+                    })
+                    .catch(function (error) {
+                        res.send(error)
+                    })
+            }
+
+        } else {
+            res.json(errors)
+
+        }
+    },
 
 
     delete: function (req, res) {
@@ -170,6 +219,20 @@ module.exports = {
                 res.send(error)
             })
     },
+
+
+    // delete2: function (req, res) {
+    //     sequelize.query("DELETE FROM product where id = " + req.params.id)
+    //     .then (function(resultado){
+    //         let product = resultado[0];
+    //         res.send("Producto eliminado con éxito")
+
+    //     })
+    //     .catch(function (error) {
+    //         return res.send("Error al eliminar producto")
+    //     })
+    // },
+////-----------FIN Prueba raw query
 
     searchView: function (req, res) {
         res.render('pages/search', {
@@ -196,20 +259,20 @@ module.exports = {
     category: function (req, res) {
         db.Product.findAll(
             {
-            where: {
-                id_category:req.params.id, 
-            }
-        })
+                where: {
+                    id_category: req.params.id,
+                }
+            })
             .then(function (productos) {
 
-                db.Category.findByPk (req.params.id)
-                .then(function (category) {
-                    console.log(category.name)
-                    return res.render('pages/productsCategoria', {
-                        category: category,
-                        productos: productos,
+                db.Category.findByPk(req.params.id)
+                    .then(function (category) {
+                        console.log(category.name)
+                        return res.render('pages/productsCategoria', {
+                            category: category,
+                            productos: productos,
+                        })
                     })
-                })
 
             })
             .catch(function (error) {

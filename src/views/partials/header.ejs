@@ -9,8 +9,11 @@
     <li><a href="/products/search"><i class="fa fa-search "></i><span class="enlaceName">Buscar</span></a></li>
     <% if( typeof usuarioLogueado=="undefined" ){%>
       <li><a href="/login"><i class="fa fa-user"></i><span class="enlaceName">Ingresar</span></a></li>
-      <li><a href="/products/cart"><i class="fa  fa-cart-plus"></i> <span class="enlaceName">Mi carrito </span></a></li>
-
+      <li><a href="/products/cart"><i class="fa  fa-cart-plus"></i>
+        <span class="badge badgeCounter">7</span> 
+        <span class="enlaceName">Mi carrito</span>
+       
+         </a></li>
       <% } else{ %>
 
         <li>
