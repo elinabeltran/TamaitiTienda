@@ -86,7 +86,7 @@ module.exports = {
         }
 
     },
-////-----------COMIENZA Prueba raw query
+    ////-----------COMIENZA Prueba raw query
 
     // detailPrueba: function (req, res) {
     //     sequelize.query("SELECT * FROM product where id = " + req.params.id)
@@ -99,11 +99,11 @@ module.exports = {
     //         return res.send(error)
     //     })
     // },
-////-----------FIN Prueba raw query
+    ////-----------FIN Prueba raw query
 
     detail: function (req, res) {
 
-  
+
         let pedidoProducto = req.params.id;
         db.Product.findAll(
             { include: "category" }
@@ -232,7 +232,7 @@ module.exports = {
     //         return res.send("Error al eliminar producto")
     //     })
     // },
-////-----------FIN Prueba raw query
+    ////-----------FIN Prueba raw query
 
     searchView: function (req, res) {
         res.render('pages/search', {
@@ -273,13 +273,54 @@ module.exports = {
                             productos: productos,
                         })
                     })
-
             })
             .catch(function (error) {
                 res.send(error)
             })
     },
 
+    age: function (req, res) {
+        let selectAge = "";
 
+        switch (req.params.id) {
+            case 'age1':
+                selectAge = '1 a 3 años'
+                break;
+
+            case 'age2':
+                selectAge = "3 a 6 años"
+                break;
+
+            case 'age3':
+                selectAge = "6 a 9 años"
+                break;
+
+            case 'age4':
+                selectAge = "+9 años"
+                break;
+        }
+
+        db.Product.findAll(
+            {
+                 where: {
+                    age: selectAge,
+                }
+            })
+            .then(function (productos) {
+
+                db.Category.findAll()
+                    .then(function (category) {
+                        return res.render('pages/productsAge', {
+                            category: category,
+                            productos: productos,
+                            age: selectAge,
+                        })
+                    })
+            })
+
+
+            .catch(function (error) {
+                res.send(error)
+            })
+    },
 }
-

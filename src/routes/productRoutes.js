@@ -16,6 +16,8 @@ router.get('/search', productController.searchView);
 router.get('/searchResults', productController.search);
 
 router.get('/category/:id', productController.category);
+router.get('/age/:id', productController.age);
+
 
 router.get('/create', onlyAdmin, productController.boardCreate);
 router.post('/create', onlyAdmin, upload.any(), imgValidator, productValidator, productController.create);
