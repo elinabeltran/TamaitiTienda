@@ -4,7 +4,7 @@
 
         <header>
             <%- include('../partials/header'); %>
-            <script src="/js/cart.js"></script>
+            <script src="/js/addcart.js"></script>
 
         </header>
 
@@ -14,7 +14,7 @@
             <img src="/uploads/img_products/<%= elProducto.img_url %>" alt="<%= elProducto.name %>">
             <div class="text">
                 <label>Juego: </label>
-                <h3 class="title">
+                <h3 id="name" class="title">
                     <%= elProducto.name %>
                 </h3>
 
@@ -22,7 +22,7 @@
                 <h5 class="edad">
                     <%= elProducto.category.name %> | <%= elProducto.age %>
                 </h5>
-                <h2 class="precio" style="color: #000;">$ <%= elProducto.price %>
+                <h2 id="precio" class="precio" style="color: #000;">$ <%= elProducto.price %>
                 </h2>
                 <br>
 
@@ -30,20 +30,18 @@
 
                 <% if( typeof usuarioLogueado !="undefined" && usuarioLogueado.rol==1 ){%>
 
-                    <button type="submit" class="btn">Agregar al Carrito</button>
+                    <!-- <button type="submit" id="agregar" class="add-cart btn">Agregar al Carrito</button> -->
                     <a h href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
                     <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE" method="post">
                         <button type="submit" class="btn btn_delete">Borrar</button></form>
 
                     <%}else{%>
-<!-- 
-                        <form style="margin-top: 10px;" action="<%= elProducto.id %>" method="GET">
-                            <button type="submit" id="addCart" class="add-cart btn">Agregar al Carrito</button></form>
- -->
 
-                        <button type="submit" id="addCart" class="add-cart btn">Agregar al Carrito</button>
+                        <button id="agregar" class="add-cart btn">Agregar al Carrito</button>
 
                     <%}%>
+
+
 
             </div>
         </div>

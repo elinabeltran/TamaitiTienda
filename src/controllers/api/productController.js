@@ -105,6 +105,28 @@ module.exports = {
             })
     },
 
+    listCategories:function (req, res) {
+        db.Category.findAll()
+        .then(function (categories) {
+            if (categories.length > 0) {
+                let respuestaApi = {
+                    meta: {
+                        status: 200,
+                        url: "/api/products/categories",
+                        total: categories.length
+                    },
+                    data: categories
+                }
+                return res.json(respuestaApi)
+            } else {
+                return res.json({ status: 204 })
+            }
+        })
+        .catch(function () {
+            res.json({ status: 500 })
+        })
+    },
+
     listFilter: function (req, res) {
         db.Product.findAll({
             include: "category",
@@ -119,7 +141,7 @@ module.exports = {
                         meta: {
                             status: 200,
                             category_name: productosFiltrados[1].category.name,
-                            url: "/api/products/category/" + req.params.id,
+                            url: "/api/products/categories/" + req.params.id,
                             total: productosFiltrados.length
                         },
                         data: productosFiltrados
