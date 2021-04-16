@@ -1,45 +1,57 @@
 <%- include('../partials/head'); %>
-<body>
 
-    <header>
-        <%- include('../partials/header'); %>
-    </header>
+    <body>
 
-<h1 class="titlePage">Tienda Online</h1>
+        <div class="conteiner">
 
-<section class="oportunidades">
-    <h5> <%= productos.length %> SUGERENCIAS PARA <%= age.toUpperCase() %> </h5>
+            
+            <header>
+                <%- include('../partials/header'); %>
+            </header>
 
- 
-     
-    <div class="productList">
-        <% for (let i=0; i < productos.length; i++) {%>
-            <a href="../<%= productos[i].id %>" class="productCard">
-                <img src="/uploads/img_products/<%= productos[i].img_url %>" alt="producto1">
-                <div class="text">
-                    <h3 class="title">
-                        <%= productos[i].name %>
-                    </h3>
-                    <h5 class="edad">
-                        <%= productos[i].age %>
-                    </h5>
-                    <h5 class="edad">
-                        <%= category.name %>
+
+            <main>
+
+                <h1 class="titlePage">Tienda Online</h1>
+
+                <section class="oportunidades">
+                    <h5>
+                        <%= productos.length %> SUGERENCIAS PARA <%= age.toUpperCase() %>
                     </h5>
 
-                    <h4 class="precio">$<%= productos[i].price %>
-                    </h4>
-                    <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6>
-                </div>
-            </a>
-            <% }%>
-    </div>
-</section>
+                    <div class="productList">
+                        <% for (let i=0; i < productos.length; i++) {%>
+                            <a href="../<%= productos[i].id %>" class="productCard">
+                                <img src="/uploads/img_products/<%= productos[i].img_url %>" alt="producto1">
+                                <div class="text">
+                                    <h3 class="title">
+                                        <%= productos[i].name %>
+                                    </h3>
+                                    <h5 class="edad">
+                                        <%= productos[i].age %>
+                                    </h5>
+                                    <h5 class="edad">
+                                        <%= category.name %>
+                                    </h5>
+
+                                    <h4 class="precio">$<%= productos[i].price %>
+                                    </h4>
+                                    <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6>
+                                </div>
+                            </a>
+                            <% }%>
+                    </div>
+                </section>
 
 
+            </main>
 
-    <footer>
-        <%- include('../partials/footer'); %>
-    </footer>
 
-<%- include('../partials/closure'); %>
+        </div>
+
+
+        <footer>
+            <%- include('../partials/footer'); %>
+        </footer>
+
+        <%- include('../partials/closure'); %>

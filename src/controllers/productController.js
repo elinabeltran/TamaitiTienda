@@ -9,7 +9,7 @@ module.exports = {
         db.Product.findAll(
             {
                 include: "category",
-                limit: 10,
+                // limit: 10,
                 order: [
                     ['id', 'DESC'],
                 ],

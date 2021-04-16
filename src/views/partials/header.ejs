@@ -7,39 +7,34 @@
 
   <ul class="enlaces">
     <li><a href="/products/search"><i class="fa fa-search "></i><span class="enlaceName">Buscar</span></a></li>
+    <li><a href="/products/cart"><i class="fa  fa-cart-plus"></i>
+        <span class="cartNumber badge badgeCounter">0</span>
+        <span class="enlaceName">Mi carrito</span>
+        </a>
+    </li>
+
     <% if( typeof usuarioLogueado=="undefined" ){%>
       <li><a href="/login"><i class="fa fa-user"></i><span class="enlaceName">Ingresar</span></a></li>
-      <li><a href="/products/cart"><i class="fa  fa-cart-plus"></i>
-        <span class="badge badgeCounter">7</span> 
-        <span class="enlaceName">Mi carrito</span>
-       
-         </a></li>
       <% } else{ %>
-
         <li>
-
           <a href="/register/<%= usuarioLogueado.id%>"><i class="fa fa-user" style="color: #2fb26f;"></i>
-
             <!-- <img style="border-radius: 50%;height:30px; padding: auto;margin: 0px;border-style:2;" src="/uploads/avatar_user/<%= usuarioLogueado.avatar%>" alt="avatar"> -->
             <span class="enlaceName">
               <%= usuarioLogueado.name%>
             </span>
           </a>
         </li>
-        <li><a href="products/cart"><i class="fa  fa-cart-plus"></i> <span class="enlaceName">Mi carrito </span></a>
-        </li>
-
         <% } %>
   </ul>
 </nav>
 
-<% if ( typeof usuarioLogueado!="undefined" && usuarioLogueado.rol ==1){ %>
+<% if ( typeof usuarioLogueado!="undefined" && usuarioLogueado.rol==1){ %>
 
   <nav id="menuAdmin" class="menuAdmin">
-    <ul class="enlacesAdmin" >
+    <ul class="enlacesAdmin">
       <li><a href="/products"><span class="">Tienda Online</span></a></li>
       <li><a href="/login/cerrarsesion"><span class="">Cerrar Sesión</span></a></li>
-      <li><a href="/products/create" class="btnNewProduct"><span >Nuevo Producto</span></a></li>
+      <li><a href="/products/create" class="btnNewProduct"><span>Nuevo Producto</span></a></li>
     </ul>
   </nav>
 
@@ -49,39 +44,48 @@
 
 
 
-
-
-
-
-
-
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-  <% if( typeof category !="undefined" ){%>
-
-    <% for (let i=0; i < category.length; i++) {%>
-      <a href="/products/category/<%=category[i].id%>">
-        <%= category[i].name%>
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="/products" class="btn_secundary">
+        Tienda Online
       </a>
-      <% }%>
-        <% }%>
 
-</div>
+      <% if( typeof category !="undefined" ){%>
+
+        <% for (let i=0; i < category.length; i++) {%>
+          <a href="/products/category/<%=category[i].id%>">
+            <%= category[i].name%>
+          </a>
+          <% }%>
+            <% }%>
+
+    </div>
 
 
-<!-- Este es el script para el funcionamiento del sidebar -->
+    <!-- Este es el script para el funcionamiento del sidebar -->
 
-<script>
-  function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
 
-  }
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+    </script>
 
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    <!-- Este es el script para el indice del icono cart -->
 
-  }
+    <script>
+          setInterval(
+     function () {
+        let cartNumber = document.querySelector("span.cartNumber")
 
-</script>
+        if (localStorage.cart != undefined && localStorage.cart.length != cartNumber) {
+          let cart = JSON.parse(localStorage.cart);
+          let indice = cart.length;
+          document.querySelector("span.cartNumber").innerHTML = indice
+          console.log(indice)
+        }
+      },100)
+    </script>

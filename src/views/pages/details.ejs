@@ -1,89 +1,102 @@
 <%- include('../partials/head'); %>
 
     <body>
+        <div class="conteiner">
 
-        <header>
-            <%- include('../partials/header'); %>
-            <script src="/js/addcart.js"></script>
+            <header>
+                <%- include('../partials/header'); %>
+            </header>
 
-        </header>
+            <main>
+                <section class="productDetail">
+                    <h1 class="titlePage">Detalle de <%= elProducto.name %>
+                    </h1>
+                    <div class="productDetail">
+                        <img id='imagen' src="/uploads/img_products/<%= elProducto.img_url %>"
+                            alt="<%= elProducto.name %>">
+                        <div class="text">
+                            <label>Juego: </label>
+                            <h3 id='name' class="title">
+                                <%= elProducto.name %>
+                            </h3>
 
-        <h1 class="titlePage">Detalle de <%= elProducto.name %>
-        </h1>
-        <div class="productDetail">
-            <img src="/uploads/img_products/<%= elProducto.img_url %>" alt="<%= elProducto.name %>">
-            <div class="text">
-                <label>Juego: </label>
-                <h3 id="name" class="title">
-                    <%= elProducto.name %>
-                </h3>
+
+                            <h5 class="edad">
+                                <%= elProducto.category.name %> | <%= elProducto.age %>
+                            </h5>
+                            <h2 id='precio' class="precio" style="color: #000;">$ <%= elProducto.price %>
+                            </h2>
+                            <br>
+
+                            <!-- <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6> -->
+
+                            <% if( typeof usuarioLogueado !="undefined" && usuarioLogueado.rol==1 ){%>
+
+                                <a href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
+                                <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE"
+                                    method="post">
+                                    <button type="submit" class="btn btn_delete">Borrar</button>
+                                </form>
+
+                                <%}%>
+
+                                <a href="/products/cart"><button id="addBtn" class="add-cart btn">Agregar al Carrito</button></a>
 
 
-                <h5 class="edad">
-                    <%= elProducto.category.name %> | <%= elProducto.age %>
-                </h5>
-                <h2 id="precio" class="precio" style="color: #000;">$ <%= elProducto.price %>
-                </h2>
+
+
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="productInfo">
+                        <label>Características: </label>
+                        <br>
+                        <br>
+                        <p>
+                            <%= elProducto.description %>
+                        </p>
+                    </div>
+                </section>
+
                 <br>
 
-                <!-- <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6> -->
+                <section class="oportunidades">
+                    <h3>También te puede interesar</h3>
+                    <div class="productList">
+                        <% for (let i=0; i < 3; i++) {%>
+                            <a href="<%= productos[i].id %>" class="productCard">
+                                <img src="/uploads/img_products/<%= productos[i].img_url %>" alt="producto1">
+                                <div class="text">
+                                    <h3 class="title">
+                                        <%= productos[i].name %>
+                                    </h3>
+                                    <h5 class="edad">
+                                        <%= productos[i].age %>
+                                    </h5>
+                                    <h4 class="precio">$<%= productos[i].price %>
+                                    </h4>
+                                    <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6>
+                                </div>
+                            </a>
+                            <% }%>
 
-                <% if( typeof usuarioLogueado !="undefined" && usuarioLogueado.rol==1 ){%>
+                    </div>
+                    </br>
 
-                    <!-- <button type="submit" id="agregar" class="add-cart btn">Agregar al Carrito</button> -->
-                    <a h href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
-                    <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE" method="post">
-                        <button type="submit" class="btn btn_delete">Borrar</button></form>
+                    <a class="btn btn_secundary" href="/products"> Todos los productos</a>
+                </section>
 
-                    <%}else{%>
-
-                        <button id="agregar" class="add-cart btn">Agregar al Carrito</button>
-
-                    <%}%>
-
-
-
-            </div>
-        </div>
-        <br>
-        <div class="productInfo">
-            <label>Características: </label>
-            <br>
-            <br>
-            <p><%= elProducto.description %></p>
-        </div>
-
-        <br>
-
-        <section class="oportunidades">
-            <h3>También te puede interesar</h3>
-            <div class="productList">
-                <% for (let i=0; i < productos.length; i++) {%>
-                    <a href="<%= productos[i].id %>" class="productCard">
-                        <img src="/uploads/img_products/<%= productos[i].img_url %>" alt="producto1">
-                        <div class="text">
-                            <h3 class="title">
-                                <%= productos[i].name %>
-                            </h3>
-                            <h5 class="edad">
-                                <%= productos[i].age %>
-                            </h5>
-                            <h4 class="precio">$<%= productos[i].price %>
-                            </h4>
-                            <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6>
-                        </div>
-                    </a>
-                    <% }%>
-            </div>
-
-            </div>
-        </section>
-
-
+        </main>
 
 
         <footer>
             <%- include('../partials/footer'); %>
         </footer>
+
+
+        </div>
+
+        <script src="/js/addcart.js"></script>
 
         <%- include('../partials/closure'); %>

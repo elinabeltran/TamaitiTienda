@@ -26,6 +26,9 @@
 body {
 font-family: 'Roboto';
 text-align: center;
+display: flex;
+min-height: 100vh;
+flex-direction: column;
 }
 
 a {
@@ -48,7 +51,9 @@ form {
     text-align: center;
 }
 
-
+.conteiner {
+    flex-grow: 1;
+}
 
 /* ============
 - HEADER
@@ -347,6 +352,8 @@ section.buscarEdad ul {
     margin: 30px auto;
     }
 section.buscarEdad ul li {
+    margin-bottom: 10px;
+    margin-left: 10px;
     }
 
 section.buscarEdad ul li a{
@@ -615,6 +622,8 @@ section div.cartCard{
 
 section.cart ul{
 margin-bottom: 10px;
+width: 650px;
+text-align: left;
  }
 
 section.cart li.product{
@@ -633,25 +642,19 @@ section.cart .product img{
     object-fit: cover;
     margin-right: 10px;
     border-radius: 10px;
+    padding: 5px;
     }
 
-section.cart .product h4{
-    margin-right: 10px;
-    color:#373737a8
-}
+section.cart .product .nameProduct {
+        margin: 10px;
+        width:50%;
+        color:#373737a8
+      }
 
-section.cart .product h3{
-    margin-right: 10px;
-    margin-left: 30px;
-    color:#000
-
-
-}
-
-/* section.cart .actions{
-    padding: 10px;
-    } */
-
+section.cart .product .nameProduct h6{
+    font-size: 1.2em;
+    text-align: left;
+      }
 
 section.cart .total{
         display: flex;
@@ -679,7 +682,7 @@ section.cart .total{
         outline: none !important;
         position: relative;
         line-height: 35px;
-        padding: 5px 20px;
+        padding: 5px 15px;
     }
 
 
@@ -803,22 +806,22 @@ background-color:#4fb6a5;
 
 
 
-
-
 section div.cartCard{
     width: 100%;
-
+    align-items: stretch;
+    padding: 2%;
 }
 
 section.cart ul{
-margin-bottom: 10px;
+  margin-bottom: 10px;
+  width:100%;
 }
 
 section.cart li.product{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items:center;
   text-align: center;
   padding-bottom: 10px;
@@ -833,14 +836,16 @@ section.cart .product img{
   border-radius: 10px;
   }
 
-section.cart .product h4{
+section.cart .product .nameProduct {
   margin: 10px;
-  max-width: 200px;
+  width:40%;
   color:#373737a8
 }
 
+section.cart .product .nameProduct h6 {
+    font-size: 1.0em;
 
-
+}
 
 
 /* ================================

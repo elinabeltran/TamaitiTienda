@@ -1,33 +1,20 @@
 window.addEventListener('load', function () {
 
-    let addBtn = document.getElementById('addBtn');
+    let vaciar = document.getElementById('vaciar');
+    vaciar.addEventListener('click', function (event) {
 
-    addBtn.addEventListener('click', function (event) {
+        alert("Vas a vaciar todos los productos seleccionados en tu carrito")
+        
+        localStorage.clear('cart')
+        document.querySelector("ul.cartList").innerHTML == 
+        `<li class="product">Aún no hay productos en tu carrito</li>`
+        
+        location.reload();
 
-        let imagen = document.getElementById('imagen').getAttribute('src');
-        let nombreProduct = document.getElementById('name').innerText;
-        let precioProduct = document.getElementById('precio').innerText;
-
-        let productPedido = {
-            name: nombreProduct,
-            imagen: imagen,
-            precio: precioProduct,
-            amount: 1,
-        }
-
-        if (localStorage.cart == undefined) {
-            let cart = []
-            cart.push(productPedido)
-            localStorage.setItem('cart', JSON.stringify(cart))
-
-        }else{
-            let cart = JSON.parse(localStorage.cart)
-            cart.push(productPedido)
-            localStorage.setItem('cart', JSON.stringify(cart))
-        }
-        alert("Has agregado el producto a tu carrito")
 
     })
+
+
 })
 
     // let urlArray =  window.location.href.split("/");

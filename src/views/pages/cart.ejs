@@ -1,63 +1,43 @@
 <%- include('../partials/head'); %>
 
     <body>
-
-        <header>
-            <%- include('../partials/header'); %>
-        </header>
+        <div class="conteiner">
 
 
-        <section class="cart">
-            <h1 class="titlePage">Carrito de productos</h1>
-
-            <div class="cartCard">
-                <ul class="cartList">
-                    <h5> TU COMPRA </h5>
-
-                    <li class="product">
-                        <img src="https://tamaiti.herokuapp.com/uploads/img_products/Memo1614963422173.jpg" alt="">
-                        <div>
-                            <h4>EL pajaro azul y verde </h4>
-                        </div>
-                        <h3 >$4.000,-</h3>
-                        <div class="actions">
-                            <button class="btn-trash"><i class="fa fa-trash-o"></i></button>
-                        </div>
-                    </li>
-
-                    <li class="product">
-                        <img src="https://tamaiti.herokuapp.com/uploads/img_products/Memo1614963422173.jpg" alt="">
-                        <div>
-                            <h4>EL pajaro azul y verde </h4>
-                        </div>
-                        <h3 >$4.000,-</h3>
-                        <div class="actions">
-                            <button class="btn-trash"><i class="fa fa-trash-o"></i></button>
-                        </div>
-                    </li>
+            <header>
+                <%- include('../partials/header'); %>
+            </header>
 
 
+            <main>
+                <section class="cart">
 
-                    <li class="total">
-                        <h4>TOTAL</h2>
-                            <h2>$4.000,-</h2>
-                        </li>
-                </ul>
+                    <h1 class="titlePage">Carrito de productos</h1>
 
-                <button class="btn-trash">CONFIRMAR COMPRA</button>
+                    <div class="cartCard">
+                        <h5> TU COMPRA </h5>
+                        <ul id="cartList" class="cartList">
+                        </ul>
 
-            
-            </div>
+                        <button class="btn-trash confirmar">CONFIRMAR COMPRA</button>
+                        </br>
+                        <button id="vaciar" class="btn_secundary vaciar">VACIAR CARRITO</button>
+                        </br>
+                    </div>
+        </div>
 
         </section>
+        </main>
 
-    <script src="js/cart.js"> </script>
- 
-
-
+        </div>
 
         <footer>
             <%- include('../partials/footer'); %>
         </footer>
+
+
+        <script src="/js/cart.js"></script>
+        <script src="/js/removeCart.js"></script>
+
 
         <%- include('../partials/closure'); %>

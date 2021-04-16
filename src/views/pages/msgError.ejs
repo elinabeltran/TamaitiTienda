@@ -1,24 +1,29 @@
 <%- include('../partials/head'); %>
-<body>
 
-    <header>
-        <%- include('../partials/header'); %>
-    </header>
+    <body>
 
-<h1 class="titlePage"><i class="fa fa-exclamation-triangle"></i></h1>
+        <div class="conteiner">
 
-<h1 class="titlePage"><%= elMensaje %></h1>
-<h3>Ups, lo siento,  parece que algo salió mal!</h3>
+            <header>
+                <%- include('../partials/header'); %>
+            </header>
 
-<br>
-<br>
+            <main>
+                <h1 class="titlePage"><i class="fa fa-exclamation-triangle"></i></h1>
+                <br>
+                <h1 class="titlePage">
+                    <%= elMensaje %>
+                </h1>
+                <br>
+                <h3>Ups, lo siento, parece que algo salió mal!</h3>
+            </main>
 
-<br>
+            
+        </div>
 
 
+        <footer>
+            <%- include('../partials/footer'); %>
+        </footer>
 
-    <footer>
-        <%- include('../partials/footer'); %>
-    </footer>
-
-<%- include('../partials/closure'); %>
+        <%- include('../partials/closure'); %>
