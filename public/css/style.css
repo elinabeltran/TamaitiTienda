@@ -587,8 +587,8 @@ label{
 - Style Product Details page
 ================================*/
 .productDetail img{
-    width: 400px;
-    height: 400px; 
+    width: 350px;
+    height: 350px; 
     margin-right: 10px;
     object-fit: cover;
     border-radius: 8px;

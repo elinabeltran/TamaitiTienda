@@ -1,34 +1,75 @@
 window.addEventListener('load', function () {
 
     let addBtn = document.getElementById('addBtn');
+    let cartNumber =document.querySelector("span.cartNumber")
 
-    addBtn.addEventListener('click', function (event) {
+    if (addBtn != null) {
 
-        let imagen = document.getElementById('imagen').getAttribute('src');
-        let nombreProduct = document.getElementById('name').innerText;
-        let precioProduct = document.getElementById('precio').innerText;
+        addBtn.addEventListener('click', function (event) {
 
-        let productPedido = {
-            name: nombreProduct,
-            imagen: imagen,
-            precio: precioProduct,
-            amount: 1,
-        }
+            let imagen = document.getElementById('imagen').getAttribute('src');
+            let nombreProduct = document.getElementById('name').innerText;
+            let id = document.getElementById('name').getAttribute('value');
+            let precioProduct = document.getElementById('precio').getAttribute('value');
 
-        if (localStorage.cart == undefined) {
-            let cart = []
-            cart.push(productPedido)
-            localStorage.setItem('cart', JSON.stringify(cart))
+            let productPedido = {
+                name: nombreProduct,
+                imagen: imagen,
+                precio: precioProduct,
+                id: id,
+                amount: 1,
+            }
 
-        }else{
-            let cart = JSON.parse(localStorage.cart)
-            cart.push(productPedido)
-            localStorage.setItem('cart', JSON.stringify(cart))
-        }
-        alert("Has agregado el producto a tu carrito")
+            if (localStorage.cart == undefined) {
+                let cart = []
+                cart.push(productPedido)
+                localStorage.setItem('cart', JSON.stringify(cart))
 
-    })
-})
+            } else {
+                let cart = JSON.parse(localStorage.cart)
+                // hacer un map buscar si existe un producto con mismo id ---- aumento cantidad /// retorna un nuevo array con los cambios que hice en ese array
+                // set con el nuevo array 
+                cart.push(productPedido)
+                localStorage.setItem('cart', JSON.stringify(cart))
+  
+            }
+                // actualiza el indice del head 
+
+
+
+
+                    let cart = JSON.parse(localStorage.cart);
+                    let indice = cart.length;
+                    cartNumber.innerHTML += indice
+
+                    console.log(indice)
+               
+
+        });
+
+
+
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // let urlArray =  window.location.href.split("/");
     // let idURL = urlArray[urlArray.length - 1];

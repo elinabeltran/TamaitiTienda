@@ -1,6 +1,5 @@
 window.addEventListener('load', function () {
 
-
     if (localStorage.cart == undefined) {
         document.querySelector("div.cartCard").innerHTML += `
         <img style="width:250px; margin: 0 40px;" src="/images/cart_icon.png" alt="">
@@ -14,10 +13,11 @@ window.addEventListener('load', function () {
     } else {
         let cart = JSON.parse(localStorage.cart);
         let total = 0;
-    
+        let ulCart = document.querySelector("ul.cartList")
+
+
         for (let i = 0; i < cart.length; i++) {
-            precio =parseInt(cart.precio);
-   
+            precio =parseInt(cart[i].precio);
             total = total + precio
 
             let productItem = `
@@ -25,21 +25,23 @@ window.addEventListener('load', function () {
                 <img src="${cart[i].imagen}" alt="">
                 <div class="nameProduct"><h6>${cart[i].name}</h6></div>
                 
-                <h5>${cart[i].precio}</h5>
-                <div class="actions"><button id="btn-trash" class="btn-trash"><i class="fa fa-trash-o"></i></button></div>
+                <h5>$ ${cart[i].precio}</h5>
+                <div class="actions"><button id="btn-trash" value=${cart[i].id} class="btn-trash"><i class="fa fa-trash-o"></i></button></div>
                 </li>
                 `
-             document.querySelector("ul.cartList").innerHTML += productItem
+             ulCart.innerHTML += productItem
 
         }
         document.querySelector("ul.cartList").innerHTML +=
         ` <li class="total">
             <h4>TOTAL</h2>
-            <h2>${total}</h2>
+            <h2>$ ${total}</h2>
          </li>
         `  
    
     }
+
+
 
 
 })
