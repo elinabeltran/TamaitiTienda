@@ -5,8 +5,8 @@ function numeritoCart() {
         let indice = cart.length;
         cartNumber.innerHTML = indice
     } else {
-        // let indice = 0;
-        // cartNumber.innerHTML = indice
+       let indice = 0;
+        cartNumber.innerHTML = indice
     }
 }
 
