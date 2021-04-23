@@ -2,6 +2,7 @@ window.addEventListener('load', function () {
 
     let formulario = document.querySelector('form.createProductForm')
 
+
     formulario.addEventListener('submit', function (e) {
        
         let arrayErrors = []
@@ -13,7 +14,7 @@ window.addEventListener('load', function () {
         if (name.value == "") {
             arrayErrors.push('Debes colocar un nombre de producto.')
         }
-        console.log(image.value)
+        // console.log(image.value)
 
         if (description.value.length < 5) {
             arrayErrors.push('Debes completar la descripción(5 caracteres minimo)')

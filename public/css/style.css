@@ -55,6 +55,10 @@ form {
     flex-grow: 1;
 }
 
+.hidden {
+    display:none;
+}
+
 /* ============
 - HEADER
 ============ */
@@ -847,6 +851,9 @@ section.cart .product .nameProduct h6 {
 
 }
 
+section.buscarEdad ul li a{
+    padding: 20px 50px !important;
+ };
 
 /* ================================
 - Style Product Details page
@@ -922,3 +929,5 @@ a.productCard .text h6.formaPago {
     color:#231f2048;
     font-size: 16px;
 };
+
+

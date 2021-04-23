@@ -200,7 +200,19 @@ module.exports = {
             }
 
         } else {
-            res.json(errors)
+
+            db.Product.findByPk(req.params.id)
+            .then(function (elProducto) {
+                db.Category.findAll()
+                    .then(function (categorias) {
+                        res.render("pages/productEdit", {
+                            elProducto: elProducto,
+                            categorias: categorias,
+                            errors: errors.errors
+
+                        })
+                    })
+            })
 
         }
     },

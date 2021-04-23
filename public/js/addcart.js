@@ -1,7 +1,6 @@
 window.addEventListener('load', function () {
 
     let addBtn = document.getElementById('addBtn');
-    let cartNumber =document.querySelector("span.cartNumber")
 
     if (addBtn != null) {
 
@@ -31,23 +30,10 @@ window.addEventListener('load', function () {
                 // set con el nuevo array 
                 cart.push(productPedido)
                 localStorage.setItem('cart', JSON.stringify(cart))
-  
-            }
-                // actualiza el indice del head 
 
-
-
-
-                    let cart = JSON.parse(localStorage.cart);
-                    let indice = cart.length;
-                    cartNumber.innerHTML += indice
-
-                    console.log(indice)
-               
+            } 
 
         });
-
-
 
     }
 

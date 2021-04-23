@@ -13,11 +13,15 @@ window.addEventListener('load', function () {
     })
 
     
-    let deleteBtn = document.getElementById('btn-trash');
-    let idItem =  document.getElementById('btn-trash').getAttribute('value');
+    let deleteBtns = document.querySelectorAll('button.borrarItem');
+    // let idItem =  document.querySelector('button.borrarItem').getAttribute('value');
+
+    for (let i = 0; i < deleteBtns.length; i++) {
+      let deleteBtn = deleteBtns[i]
+      let idItem = deleteBtns[i].getAttribute('value')
 
 
-    deleteBtn.addEventListener('click', function (event) {
+      deleteBtn.addEventListener('click', function (event) {
         let cart = JSON.parse(localStorage.cart)
     
         function filtrarPorID(obj) {
@@ -36,6 +40,9 @@ window.addEventListener('load', function () {
 
  
     })
+      
+    }
+   
 
 
 })

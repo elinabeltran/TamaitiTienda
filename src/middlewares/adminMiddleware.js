@@ -4,8 +4,9 @@ function adminMiddleware(req, res, next) {
         req.session.usuarioLogueado.rol == 1) {
         next();
     } else {
-        res.redirect("../login")
+        let elMensaje="Esta página es sólo para administradores.";
+        res.render ("pages/msgError", {elMensaje})    }
     }
-}
+
 
 module.exports = adminMiddleware;

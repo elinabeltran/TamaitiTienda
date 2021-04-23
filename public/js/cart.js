@@ -26,7 +26,7 @@ window.addEventListener('load', function () {
                 <div class="nameProduct"><h6>${cart[i].name}</h6></div>
                 
                 <h5>$ ${cart[i].precio}</h5>
-                <div class="actions"><button id="btn-trash" value=${cart[i].id} class="btn-trash"><i class="fa fa-trash-o"></i></button></div>
+                <div class="actions"><button id="btn-trash" value=${cart[i].id} class="borrarItem btn-trash"><i class="fa fa-trash-o"></i></button></div>
                 </li>
                 `
              ulCart.innerHTML += productItem
