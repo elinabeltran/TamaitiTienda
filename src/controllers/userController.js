@@ -36,10 +36,10 @@ module.exports = {
                             id: usuarioALoguear.id,
                             rol: usuarioALoguear.rol
                         }
-                        if (req.body.recordame != undefined){
-                            res.cookie("recordame", usuarioALoguear.email, {maxAge:60000})
+                        if (req.body.recordame != undefined) {
+                            res.cookie("recordame", usuarioALoguear.email, { maxAge: 60000 })
                         }
-                        
+
                         res.redirect("/")
                     } else {
                         return res.render("pages/login", {
@@ -56,7 +56,6 @@ module.exports = {
                         ]
                     })
                 }
-
             })
                 .catch(function (error) {
                     return res.send(error)
@@ -72,6 +71,7 @@ module.exports = {
         let errors = validationResult(req)
 
         if (errors.isEmpty()) {
+            
             db.User.findOrCreate({
                 where: { email: req.body.email },
                 defaults: {
@@ -82,23 +82,22 @@ module.exports = {
                     password: bcrypt.hashSync(req.body.password, 12)
                 }
             }).then(function (created, user) {
-
-                console.log(created, user)
-                if (!created) {
-                    return res.render("pages/register", {
-                        errors: [
-                            { msg: "El Email, ya fue registrado!" }
-                        ]
-                    })
-
+               
+                if (created) {
+                    console.log("creado", created)
+                    //     let msgBienvenida = {
+                    //         msg: "Te registrate con éxito. Ya puedes iniciar sesión!"
+                    //     }
+                    //    return res.render("pages/login", { msgBienvenida: msgBienvenida })
+                } else {
+                    console.log("no creado", created)
+                    // return res.render("pages/register", {
+                    //     errors: [
+                    //         { msg: "El Email, ya fue registrado!" }
+                    //     ]
+                    // })
                 }
-
-                let msgBienvenida = {
-                    msg: "Te registrate con éxito. Ya puedes iniciar sesión!"
-                }
-                console.log(msgBienvenida)
-                return res.render("pages/login", { msgBienvenida: msgBienvenida })
-
+                
 
             })
 
@@ -106,7 +105,6 @@ module.exports = {
                     return res.send(error)
                 })
         } else { return res.render("pages/register", { errors: errors.errors }) }
-
 
     },
 
@@ -138,24 +136,103 @@ module.exports = {
             })
     },
 
-    update: function (req, res) {
-        db.User.update({
-            name: req.body.name,
-            last_name: req.body.lastName,
-            email: req.body.email,
-        }, {
-            where: {
-                id: req.params.id
-            }
-        }).then(function () {
-            let id = req.params.id;
-            return res.redirect("../" + id)
 
-        })
+    update: function (req, res) {
+        let errors = validationResult(req)
+        if (errors.isEmpty()) {
+            if (req.files[0] === undefined) {
+                db.User.update({
+                     name: req.body.name,
+                     last_name: req.body.lastName,
+                     email: req.body.email,
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                    .then(function (result) {
+                        console.log(result)
+                        if (result == 1) {
+                            return res.redirect("../" + req.params.id)
+                        }
+                    })
+                    .catch(function (error) {
+                        res.send(error)
+                    })
+            } else {
+                console.log(req.files[0].image)
+
+                db.User.update({
+                    name: req.body.name,
+                    last_name: req.body.lastName,
+                    email: req.body.email,
+                    avatar: req.files[0].image,
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                    .then(function (result) {
+                        if (result == 1) {
+                            return res.redirect("../" + req.params.id)
+                        }
+                    })
+                    .catch(function (error) {
+                        res.send(error)
+                    })
+            }
+        } else {
+            db.User.findByPk(req.params.id)
+            .then(function (user) {
+
+                        res.render("pages/userEdit", {
+                            user: user,
+                            errors: errors.errors
+                        })
+            })
+        }
     },
 
 
-    logout: function (req, res){
+    // update: function (req, res) {
+    //     let errors = validationResult(req)
+    //     if (errors.isEmpty()) {
+    //         db.User.update({
+    //             name: req.body.name,
+    //             last_name: req.body.lastName,
+    //             email: req.body.email,
+    //         }, {
+    //             where: {
+    //                 id: req.params.id
+    //             }
+    //         }).then(function () {
+    //             let id = req.params.id;
+    //             return res.redirect("../" + id)
+
+    //         })
+    //     } else {
+
+    //         db.User.findByPk(req.params.id,
+    //             {
+    //                 attributes: ['name', 'last_name', "id", "avatar", "email"]
+    //             })
+    //             .then(function (user) {
+    //                 return res.render("pages/userEdit",
+    //                     {
+    //                         user: user,
+    //                         errors: errors.errors
+    //                     })
+    //             })
+
+    //             .catch(function (error) {
+    //                 return res.send(error)
+    //             })
+    //     }
+
+    // },
+
+
+    logout: function (req, res) {
         req.session.destroy();
         res.redirect('./')
     }

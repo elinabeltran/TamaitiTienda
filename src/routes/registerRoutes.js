@@ -19,7 +19,13 @@ router.post('/', upload.any(), [
 
 router.get('/:id', onlyUsers, userController.detail);
 router.get('/edit/:id',onlyUsers, userController.editBoard);
-router.put('/update/:id',onlyUsers, userController.update);
+
+
+router.put('/edit/:id',onlyUsers, upload.any(),[
+  check("name").isLength({ min: 1 }).withMessage("El campo nombre debe estar completo"),
+  check("lastName").isLength({ min: 1 }).withMessage("El campo apellido debe estar completo"),
+  check("email").isEmail().withMessage("El email debe ser un email válido"),
+], userController.update);
 
 
 module.exports = router;

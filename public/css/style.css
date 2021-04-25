@@ -53,10 +53,17 @@ form {
 
 .conteiner {
     flex-grow: 1;
+}
+
+.bkImg{
     background-image: url(../images/tamaiti_footer_bk.png);
     background-repeat: no-repeat;
     background-position: right bottom;
 }
+.bkGray{
+    background-color: #efefef;
+}
+
 
 .hidden {
     display:none;
@@ -283,9 +290,7 @@ header .sidenav {
     font-size: 36px;
     margin-left: 50px;
   }
-  
-
-
+ 
 
 
 /* ================================
@@ -377,8 +382,6 @@ section.buscarEdad ul li a{
     border: solid 1px #37373721;
      }
     
-
-
 
  /* ================================
 - seccion Oportunidades

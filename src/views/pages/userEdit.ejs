@@ -5,16 +5,43 @@
         <%- include('../partials/header'); %>
     </header>
 
-    <div class="conteiner">
+    <div class="conteiner bkGray">
     
-    <section style="background-color: lightgray;" >
+    <section >
+
+
         <div id="register" class="form">
 
-            <form  action="/register/update/<%=user.id%>?_method=PUT" autocomplete="on" method="POST" > 
-              <!-- enctype="multipart/form-data" -->
+
+            <form action="?_method=PUT" autocomplete="on" method="POST"
+              enctype="multipart/form-data">
+              
+
               <h1 class="titlePage"> Editá tu perfil</h1> 
 
               <img style="border-radius: 50%;margin-bottom: 20px;" src="/uploads/avatar_user/<%= user.avatar %>" alt="<%= user.name %>">
+
+              <div class="form-group">
+                <label for="" class="">Cambiar imagen la imagen </label>
+                <input id="image" name="image" class="form-control" " type="file" placeholder="Imagen de producto" />
+              </div>
+
+
+<!-- --------------------- ESPACIO ERRORES -->
+<% if(typeof errors != "undefined"){%>
+  <div class="errors-group">
+    <ul class="errorsUl">
+      <% for(let i = 0 ; i < errors.length; i++){%>
+        <li><%=errors[i].msg %></li>
+        <%}%>
+    </ul> 
+    </div>
+ <%}%>
+
+
+
+<!-- ---------------------FIN ESPACIO ERRORES -->
+
 
               <div class="form-group">
                 <label for="usernamesignup" class="uname" >Tu nombre</label>

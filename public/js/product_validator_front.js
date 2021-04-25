@@ -1,8 +1,8 @@
 window.addEventListener('load', function () {
 
     let formulario = document.querySelector('form.createProductForm')
-
-
+    let ulDeErrores = document.querySelector('ul.errorsUl')
+    
     formulario.addEventListener('submit', function (e) {
        
         let arrayErrors = []
@@ -36,9 +36,12 @@ window.addEventListener('load', function () {
             arrayErrors.push('Debes seleccionar una categoría.')
         }
         if (arrayErrors.length > 0) {
+            ulDeErrores.innerHTML = ""
             e.preventDefault();
             // console.log(arrayErrors)
-            let ulDeErrores = document.querySelector('ul.errorsUl')
+         
+            
+
             for (let i = 0; i < arrayErrors.length; i++) {
                 ulDeErrores.innerHTML += "<li>" + arrayErrors[i] + "</li>"
             }
