@@ -6,7 +6,10 @@ const { Op } = require("sequelize");
 module.exports = {
     index: function (req, res) {
      
-        db.Product.findAll({ limit: 6 })
+        db.Product.findAll({ limit: 6 ,
+            order: [
+                ['id', 'DESC'],
+            ],})
             .then(function (productos) {
                 res.render("pages/home", { productos: productos })
             })
