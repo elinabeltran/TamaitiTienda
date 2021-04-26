@@ -596,16 +596,43 @@ label{
 /* ================================
 - Style Product Details page
 ================================*/
+
+.productDetail .content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .productDetail img{
-    width: 350px;
-    height: 350px; 
+    /* height: 350px;  */
     margin-right: 10px;
     object-fit: cover;
     border-radius: 8px;
 
-}
-    
+ 
+    border-radius: 8px;
+    width: 30%;
 
+}
+section .productDetail .edad{
+    background-color: #4fb6a51f;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+}
+.productDetail .text{
+width: 30%;
+padding: 60px 15px 30px 15px;
+border: 1.3px solid #cff0e8;
+border-radius: 10px;
+}
+
+.productDetail .actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
 /* ================================
 - Style Product CART page
 ================================*/
@@ -728,6 +755,34 @@ section.cart .total{
     } 
 
 
+    .productDetail .content {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+      
+    }
+    
+    .productDetail img{
+        height: 350px;
+        margin-bottom: 10px;
+        object-fit: cover;
+        border-radius: 8px;
+        border-radius: 8px;
+        width: 60%;
+        margin-right: 0px;
+    
+    }
+    
+    .productDetail .text{
+    width: 60%;
+    padding: 30px 15px 30px 15px;
+    border: 1.3px solid #cff0e8;
+    border-radius: 10px;
+    }
+
 
 
 @media(max-width:375px){
@@ -814,6 +869,22 @@ background-color:#4fb6a5;
 
 }
 
+
+
+section.productDetail img {
+    height: 350px;
+    margin-bottom: 10px;
+    object-fit: cover;
+    border-radius: 8px;
+    border-radius: 8px;
+    width: 90%;
+    margin-right: 0px;
+}
+
+section.productDetail .text{
+width: 90%;
+
+}
 
 
 section div.cartCard{

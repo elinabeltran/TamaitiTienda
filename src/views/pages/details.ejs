@@ -11,12 +11,14 @@
                 <section class="productDetail">
                     <h1 class="titlePage">Detalle de <%= elProducto.name %>
                     </h1>
-                    <div class="productDetail">
+
+                    <div class="productDetail content">
                         <img id='imagen' src="/uploads/img_products/<%= elProducto.img_url %>"
                             alt="<%= elProducto.name %>">
-                        <div class="text">
+                        
+                            <div class="text">
                             <label>Juego: </label>
-                            <h3 id='name' value=<%= elProducto.id %> class="title">
+                            <h3 id='name' value=<%=elProducto.id %> class="title">
                                 <%= elProducto.name %>
                             </h3>
 
@@ -24,35 +26,41 @@
                             <h5 class="edad">
                                 <%= elProducto.category.name %> | <%= elProducto.age %>
                             </h5>
-                            <h2 id='precio' value=<%= elProducto.price %> class="precio" style="color: #000;">$ <%= elProducto.price %>
+                            <h2 id='precio' value=<%=elProducto.price %> class="precio" style="color: #000;">$ <%=
+                                    elProducto.price %>
                             </h2>
                             <br>
+                            <a href="/products/cart"><button id="addBtn" class="add-cart btn">Agregar al
+                                    Carrito</button></a>
+                            <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6>
+                            <br>
 
-                            <!-- <h6 class="formaPago"><strong>12 cuotas</strong> sin interés</h6> -->
-
+                            <div class="productInfo">
+                                <label>Características: </label>
+                                <br>
+                                <br>
+                               <p> <%= elProducto.description %></p>
+                                <br>
+                            </div>
+        
                             <% if( typeof usuarioLogueado !="undefined" && usuarioLogueado.rol==1 ){%>
-
+                            <div class="actions">
                                 <a href="edit/<%= elProducto.id %>"><button class="btn_secundary">Editar</button></a>
                                 <form style="margin-top: 10px;" action="delete/<%= elProducto.id %>?_method=DELETE"
                                     method="post">
                                     <button type="submit" class="btn btn_delete">Borrar</button>
                                 </form>
+                            </div>
 
-                                <%}%>
-
-                                <a href="/products/cart"><button id="addBtn" class="add-cart btn">Agregar al Carrito</button></a>
+                            <%}%>
 
                         </div>
+
+
                     </div>
                     <br>
-                    <div class="productInfo">
-                        <label>Características: </label>
-                        <br>
-                        <br>
-                        <p>
-                            <%= elProducto.description %>
-                        </p>
-                    </div>
+
+
                 </section>
 
                 <br>
@@ -83,15 +91,15 @@
                     <a class="btn btn_secundary" href="/products"> Todos los productos</a>
                 </section>
 
-        </main>
+            </main>
 
-    </div>
+        </div>
         <footer>
             <%- include('../partials/footer'); %>
         </footer>
 
 
-        
+
 
         <script src="/js/addcart.js"></script>
         <script src="/js/cartIndice.js"></script>
